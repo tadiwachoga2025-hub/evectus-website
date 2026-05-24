@@ -1,0 +1,14 @@
+[     831ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[     952ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[    1113ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[    1574ms] [LOG] [Fast Refresh] done in 569ms @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  230708ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  231659ms] [WARNING] Image with src "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=2000&q=80" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  232527ms] [LOG] [Fast Refresh] done in 1810ms @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  232663ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  233072ms] [LOG] [Fast Refresh] done in 510ms @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  234491ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  234535ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  234659ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477
+[  234895ms] [LOG] [Fast Refresh] done in 347ms @ http://localhost:3000/_next/static/chunks/0at5_next_dist_0_3v3tq._.js:2477

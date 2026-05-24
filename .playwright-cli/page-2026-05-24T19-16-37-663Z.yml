@@ -1,0 +1,161 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Evectus Solutions home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: EVECTUS
+      - navigation [ref=e5]:
+        - link "Solutions" [ref=e6] [cursor=pointer]:
+          - /url: /solutions
+          - generic [ref=e7]: Solutions
+          - generic [ref=e8]: Solutions
+        - link "Agenda" [ref=e9] [cursor=pointer]:
+          - /url: /african-agenda
+          - generic [ref=e10]: Agenda
+          - generic [ref=e11]: Agenda
+        - link "Process" [ref=e12] [cursor=pointer]:
+          - /url: /process
+          - generic [ref=e13]: Process
+          - generic [ref=e14]: Process
+        - link "Work" [ref=e15] [cursor=pointer]:
+          - /url: /case-studies
+          - generic [ref=e16]: Work
+          - generic [ref=e17]: Work
+      - generic [ref=e18]:
+        - link "About" [ref=e19] [cursor=pointer]:
+          - /url: /about
+        - link "Get in Touch" [ref=e20] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic:
+        - img "Team collaborating in a modern office"
+      - generic [ref=e24]:
+        - generic [ref=e25]: Driven by integrity · Built on trust · Powered by ingenuity
+        - heading "Shifting the culture. Replacing ordinary with extraordinary." [level=1] [ref=e26]
+        - paragraph [ref=e27]: Evectus Solutions bridges the gap between potential and performance. We partner with businesses, governments, and visionaries to solve complex challenges with ingenuity and integrity.
+        - generic [ref=e28]:
+          - link "Start Your Transformation" [ref=e29] [cursor=pointer]:
+            - /url: /contact
+          - link "Explore Solutions" [ref=e30] [cursor=pointer]:
+            - /url: /solutions
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]: The Vision · 2026
+        - heading "The African century requires extraordinary solutions." [level=2] [ref=e35]
+        - paragraph [ref=e36]: For too long the narrative has been about potential. The time for potential has passed; the time for performance is now. We replace ordinary fixes with superior solutions that work.
+        - link "Discover Our Mission" [ref=e37] [cursor=pointer]:
+          - /url: /african-agenda
+      - img "Modern workspace with laptops" [ref=e39]
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]: What We Do
+        - heading "Four pillars. One standard of excellence." [level=2] [ref=e44]
+      - generic [ref=e45]:
+        - link "01 Digital Transformation Legacy systems hold African enterprises back. We modernize infrastructure, migrate data to secure cloud, and embed a digital-first culture. Learn More →" [ref=e47] [cursor=pointer]:
+          - /url: /solutions/digital-transformation
+          - generic [ref=e48]: "01"
+          - heading "Digital Transformation" [level=3] [ref=e49]
+          - paragraph [ref=e50]: Legacy systems hold African enterprises back. We modernize infrastructure, migrate data to secure cloud, and embed a digital-first culture.
+          - generic [ref=e51]: Learn More →
+        - link "02 Strategic Consulting Navigate market shifts, regulatory changes, and expansion with data-driven strategies built for the African context. Learn More →" [ref=e53] [cursor=pointer]:
+          - /url: /solutions/strategic-consulting
+          - generic [ref=e54]: "02"
+          - heading "Strategic Consulting" [level=3] [ref=e55]
+          - paragraph [ref=e56]: Navigate market shifts, regulatory changes, and expansion with data-driven strategies built for the African context.
+          - generic [ref=e57]: Learn More →
+        - link "03 Technology Development Sometimes the solution doesn't exist — so we build it. Custom apps, enterprise software, and integration platforms. Learn More →" [ref=e59] [cursor=pointer]:
+          - /url: /solutions/technology-development
+          - generic [ref=e60]: "03"
+          - heading "Technology Development" [level=3] [ref=e61]
+          - paragraph [ref=e62]: Sometimes the solution doesn't exist — so we build it. Custom apps, enterprise software, and integration platforms.
+          - generic [ref=e63]: Learn More →
+        - link "04 Operational Excellence Efficiency is the engine of growth. We analyze workflows, identify bottlenecks, and implement lean methods that save time and money. Learn More →" [ref=e65] [cursor=pointer]:
+          - /url: /solutions/operational-excellence
+          - generic [ref=e66]: "04"
+          - heading "Operational Excellence" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Efficiency is the engine of growth. We analyze workflows, identify bottlenecks, and implement lean methods that save time and money.
+          - generic [ref=e69]: Learn More →
+    - generic [ref=e70]:
+      - generic:
+        - img "Collaborative workspace"
+      - generic [ref=e71]:
+        - generic [ref=e72]: Our Core Values
+        - heading "Integrity. Trust. Ingenuity. The three pillars of every solution we deliver." [level=2] [ref=e73]:
+          - text: Integrity. Trust. Ingenuity.
+          - text: The three pillars of every solution we deliver.
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]: Impact That Speaks
+        - heading "Numbers behind the narrative." [level=2] [ref=e78]
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]: +0%
+          - generic [ref=e82]: Operational Efficiency
+        - generic [ref=e83]:
+          - generic [ref=e84]: 0%
+          - generic [ref=e85]: Digital Adoption
+        - generic [ref=e86]:
+          - generic [ref=e87]: 0%
+          - generic [ref=e88]: Milestone Hit-Rate
+        - generic [ref=e89]:
+          - generic [ref=e90]: 0%
+          - generic [ref=e91]: Partner Retention
+      - generic [ref=e92]:
+        - blockquote [ref=e93]: “Evectus didn’t just fix our problem; they changed how we think about our business.”
+        - link "See Our Case Studies" [ref=e94] [cursor=pointer]:
+          - /url: /case-studies
+    - generic [ref=e96]:
+      - generic [ref=e97]: Ready?
+      - heading "Ready to shift the culture?" [level=2] [ref=e98]
+      - paragraph [ref=e99]: The ordinary path leads to ordinary results. Take the extraordinary path. Partner with Evectus Solutions to unlock your organization’s full potential.
+      - link "Book a Consultation" [ref=e100] [cursor=pointer]:
+        - /url: /contact
+  - contentinfo [ref=e101]:
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - generic [ref=e105]: Solutions
+          - link "Digital Transformation" [ref=e106] [cursor=pointer]:
+            - /url: /solutions/digital-transformation
+          - link "Strategic Consulting" [ref=e107] [cursor=pointer]:
+            - /url: /solutions/strategic-consulting
+          - link "Technology Development" [ref=e108] [cursor=pointer]:
+            - /url: /solutions/technology-development
+          - link "Operational Excellence" [ref=e109] [cursor=pointer]:
+            - /url: /solutions/operational-excellence
+        - generic [ref=e110]:
+          - generic [ref=e111]: Company
+          - link "About" [ref=e112] [cursor=pointer]:
+            - /url: /about
+          - link "African Agenda" [ref=e113] [cursor=pointer]:
+            - /url: /african-agenda
+          - link "Process" [ref=e114] [cursor=pointer]:
+            - /url: /process
+          - link "Case Studies" [ref=e115] [cursor=pointer]:
+            - /url: /case-studies
+        - generic [ref=e116]:
+          - generic [ref=e117]: Contact
+          - link "hello@evectus.solutions" [ref=e118] [cursor=pointer]:
+            - /url: mailto:hello@evectus.solutions
+          - generic [ref=e119]: Harare, Zimbabwe
+        - generic [ref=e120]:
+          - generic [ref=e121]: Engage
+          - link "Book a Consultation" [ref=e122] [cursor=pointer]:
+            - /url: /contact
+          - link "Request Case Deck" [ref=e123] [cursor=pointer]:
+            - /url: /case-studies
+      - heading "EVECTUS" [level=2] [ref=e125]:
+        - generic [ref=e126]: E
+        - generic [ref=e127]: V
+        - generic [ref=e128]: E
+        - generic [ref=e129]: C
+        - generic [ref=e130]: T
+        - generic [ref=e131]: U
+        - generic [ref=e132]: S
+      - generic [ref=e133]:
+        - generic [ref=e134]: © 2026 Evectus Solutions
+        - generic [ref=e135]: Making Africa a Global Powerhouse
+  - button "Open Next.js Dev Tools" [ref=e141] [cursor=pointer]:
+    - img [ref=e142]
+  - alert [ref=e145]

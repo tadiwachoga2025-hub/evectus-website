@@ -1,0 +1,137 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Evectus Solutions home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: EVECTUS
+      - navigation [ref=e5]:
+        - link "Solutions" [ref=e6] [cursor=pointer]:
+          - /url: /solutions
+          - generic [ref=e7]: Solutions
+          - generic [ref=e8]: Solutions
+        - link "Agenda" [ref=e9] [cursor=pointer]:
+          - /url: /african-agenda
+          - generic [ref=e10]: Agenda
+          - generic [ref=e11]: Agenda
+        - link "Process" [ref=e12] [cursor=pointer]:
+          - /url: /process
+          - generic [ref=e13]: Process
+          - generic [ref=e14]: Process
+        - link "Work" [ref=e15] [cursor=pointer]:
+          - /url: /case-studies
+          - generic [ref=e16]: Work
+          - generic [ref=e17]: Work
+      - generic [ref=e18]:
+        - link "About" [ref=e19] [cursor=pointer]:
+          - /url: /about
+        - link "Get in Touch" [ref=e20] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - img "Team meeting in a modern office" [ref=e23]
+      - generic [ref=e24]:
+        - generic [ref=e25]: About Evectus
+        - heading "Built on integrity. Driven by ingenuity. Rooted in trust." [level=1] [ref=e26]:
+          - generic [ref=e27]: Built
+          - generic [ref=e28]: "on"
+          - generic [ref=e29]: integrity.
+          - generic [ref=e30]: Driven
+          - generic [ref=e31]: by
+          - generic [ref=e32]: ingenuity.
+          - generic [ref=e33]: Rooted
+          - generic [ref=e34]: in
+          - generic [ref=e35]: trust.
+        - paragraph [ref=e36]: "Evectus Solutions was founded on a simple premise: Africa deserves better. Better systems, better strategies, better outcomes."
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: Our Values
+        - heading "Three principles. Every engagement." [level=2] [ref=e41]
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]: INTEGRITY
+          - heading "We do what's right, not what's easy." [level=3] [ref=e45]
+          - paragraph [ref=e46]: Transparency in our dealings, honesty in our assessments, and ethical standards in every solution we deploy.
+        - generic [ref=e47]:
+          - generic [ref=e48]: TRUST
+          - heading "Relationships are the currency of business." [level=3] [ref=e49]
+          - paragraph [ref=e50]: We earn trust through delivery, consistency, and communication. When Evectus commits, Evectus delivers.
+        - generic [ref=e51]:
+          - generic [ref=e52]: INGENUITY
+          - heading "Ordinary is not in our vocabulary." [level=3] [ref=e53]
+          - paragraph [ref=e54]: We approach every problem with fresh eyes — leveraging local insight and global best practices to craft exceptional solutions.
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]: Our Team
+        - heading "Strategists. Technologists. Believers." [level=2] [ref=e59]
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - img "Tadiwa Choga — Founder and CEO" [ref=e63]
+          - generic [ref=e64]:
+            - generic [ref=e65]: Tadiwa Choga
+            - generic [ref=e66]: Founder and CEO
+        - generic [ref=e69]:
+          - generic [ref=e70]: Strategy Lead
+          - generic [ref=e71]: Open Position
+        - generic [ref=e74]:
+          - generic [ref=e75]: Technology Lead
+          - generic [ref=e76]: Open Position
+        - generic [ref=e79]:
+          - generic [ref=e80]: Operations Lead
+          - generic [ref=e81]: Open Position
+    - generic [ref=e83]:
+      - generic [ref=e84]: Offices
+      - heading "Harare. Lagos. Nairobi. Cape Town." [level=2] [ref=e85]
+      - paragraph [ref=e86]: We operate where our clients are. Our home office is in Harare; our project teams deploy across the continent.
+    - generic [ref=e88]:
+      - heading "Meet the team." [level=2] [ref=e89]
+      - paragraph [ref=e90]: Get in touch — we'd love to hear about your work.
+      - link "Get in Touch" [ref=e91] [cursor=pointer]:
+        - /url: /contact
+  - contentinfo [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]: Solutions
+          - link "Digital Transformation" [ref=e97] [cursor=pointer]:
+            - /url: /solutions/digital-transformation
+          - link "Strategic Consulting" [ref=e98] [cursor=pointer]:
+            - /url: /solutions/strategic-consulting
+          - link "Technology Development" [ref=e99] [cursor=pointer]:
+            - /url: /solutions/technology-development
+          - link "Operational Excellence" [ref=e100] [cursor=pointer]:
+            - /url: /solutions/operational-excellence
+        - generic [ref=e101]:
+          - generic [ref=e102]: Company
+          - link "About" [ref=e103] [cursor=pointer]:
+            - /url: /about
+          - link "African Agenda" [ref=e104] [cursor=pointer]:
+            - /url: /african-agenda
+          - link "Process" [ref=e105] [cursor=pointer]:
+            - /url: /process
+          - link "Case Studies" [ref=e106] [cursor=pointer]:
+            - /url: /case-studies
+        - generic [ref=e107]:
+          - generic [ref=e108]: Contact
+          - link "hello@evectus.solutions" [ref=e109] [cursor=pointer]:
+            - /url: mailto:hello@evectus.solutions
+          - generic [ref=e110]: Harare, Zimbabwe
+        - generic [ref=e111]:
+          - generic [ref=e112]: Engage
+          - link "Book a Consultation" [ref=e113] [cursor=pointer]:
+            - /url: /contact
+          - link "Request Case Deck" [ref=e114] [cursor=pointer]:
+            - /url: /case-studies
+      - heading "EVECTUS" [level=2] [ref=e116]:
+        - generic [ref=e117]: E
+        - generic [ref=e118]: V
+        - generic [ref=e119]: E
+        - generic [ref=e120]: C
+        - generic [ref=e121]: T
+        - generic [ref=e122]: U
+        - generic [ref=e123]: S
+      - generic [ref=e124]:
+        - generic [ref=e125]: © 2026 Evectus Solutions
+        - generic [ref=e126]: Making Africa a Global Powerhouse
+  - button "Open Next.js Dev Tools" [ref=e132] [cursor=pointer]:
+    - img [ref=e133]
+  - alert [ref=e136]
