@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { animate, stagger } from "animejs";
+import { EvectusLogo } from "@/components/EvectusLogo";
 
 const WORDMARK = "EVECTUS";
 
@@ -128,7 +129,21 @@ export default function Footer() {
           </div>
         </motion.div>
 
-        <div className="overflow-hidden flex items-end">
+        <div className="overflow-hidden flex items-end gap-4 sm:gap-6 lg:gap-8">
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, ease: EASE_OUT_QUART }}
+            className="shrink-0 origin-bottom"
+          >
+            <EvectusLogo
+              iconOnly
+              variant="white"
+              height={80}
+              className="w-[clamp(48px,12vw,160px)] h-auto"
+            />
+          </motion.div>
           <motion.h2
             ref={wordmarkRef}
             initial={{ y: 80 }}

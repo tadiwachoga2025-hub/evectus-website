@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { EvectusLogo } from "@/components/EvectusLogo";
 
 type NavItem = { href: string; label: string };
 
@@ -90,10 +91,10 @@ export function Navbar() {
       <div className="flex items-center justify-between w-full gap-x-6 sm:gap-x-8">
         <Link
           href="/"
-          className="text-xs font-semibold tracking-[0.2em] text-white"
+          className="flex items-center"
           aria-label="Evectus Solutions home"
         >
-          EVECTUS
+          <EvectusLogo variant="white" height={28} />
         </Link>
 
         <nav className="hidden sm:flex items-center space-x-6 text-sm">
