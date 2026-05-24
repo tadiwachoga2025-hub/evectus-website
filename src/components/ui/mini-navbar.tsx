@@ -114,7 +114,7 @@ export function Navbar() {
           </Link>
           <Link
             href="/contact"
-            className="relative px-4 py-2 text-sm font-semibold text-black bg-gradient-to-b from-gray-100 to-gray-300 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)] hover:shadow-[0_0_24px_rgba(255,255,255,0.4)] hover:from-white hover:to-gray-200 transition-all duration-200"
+            className="relative px-4 py-2 text-sm font-semibold text-black bg-gradient-to-b from-gray-100 to-gray-300 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)] hover:shadow-[0_0_24px_rgba(255,255,255,0.4)] hover:from-white hover:to-gray-200 transition-all duration-200 inline-flex items-center justify-center leading-none"
           >
             Get in Touch
           </Link>
@@ -160,7 +160,7 @@ export function Navbar() {
           <Link
             href="/contact"
             onClick={close}
-            className="mt-2 w-full text-center px-4 py-2 text-sm font-semibold text-black bg-gradient-to-b from-gray-100 to-gray-300 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)] hover:from-white hover:to-gray-200 transition-all duration-200"
+            className="mt-2 w-full px-4 py-2 text-sm font-semibold text-black bg-gradient-to-b from-gray-100 to-gray-300 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)] hover:from-white hover:to-gray-200 transition-all duration-200 flex items-center justify-center leading-none"
           >
             Get in Touch
           </Link>
