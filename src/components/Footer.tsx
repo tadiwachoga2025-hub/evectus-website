@@ -11,6 +11,7 @@ const WORDMARK = "EVECTUS";
 const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
 
 const solutions = [
+  { href: "/products", label: "Products" },
   { href: "/solutions/digital-transformation", label: "Digital Transformation" },
   { href: "/solutions/strategic-consulting", label: "Strategic Consulting" },
   { href: "/solutions/technology-development", label: "Technology Development" },
@@ -110,7 +111,6 @@ export default function Footer() {
             >
               evectussolution@gmail.com
             </a>
-            <span className="text-sm sm:text-base text-white/80">Harare, Zimbabwe</span>
           </div>
           <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4">
             <span className="label text-[#A3A3A3]">Engage</span>

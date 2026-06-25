@@ -15,6 +15,7 @@ type NavItem = { href: string; label: string };
 
 const navItems: NavItem[] = [
   { href: "/solutions", label: "Solutions" },
+  { href: "/products", label: "Products" },
   { href: "/african-agenda", label: "Agenda" },
   { href: "/process", label: "Process" },
   { href: "/case-studies", label: "Work" },
