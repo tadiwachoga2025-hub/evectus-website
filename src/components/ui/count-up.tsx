@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { animate } from "animejs";
 
 type CountUpProps = {
@@ -42,20 +42,23 @@ function parseValue(raw: string): Parsed {
  */
 export function CountUp({ value, duration = 1800, className }: CountUpProps) {
   const { prefix, numeric, suffix } = parseValue(value);
-  const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState<number>(0);
+  const numRef = useRef<HTMLSpanElement>(null);
   const playedRef = useRef(false);
 
   useEffect(() => {
-    const node = ref.current;
+    const node = numRef.current;
     if (!node) return;
+
+    const write = (n: number) => {
+      node.textContent = String(n);
+    };
 
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduce) {
-      setDisplay(numeric);
+      write(numeric);
       playedRef.current = true;
       return;
     }
@@ -68,8 +71,8 @@ export function CountUp({ value, duration = 1800, className }: CountUpProps) {
         n: numeric,
         duration,
         ease: "out(3)",
-        onUpdate: () => setDisplay(Math.round(state.n)),
-        onComplete: () => setDisplay(numeric),
+        onUpdate: () => write(Math.round(state.n)),
+        onComplete: () => write(numeric),
       });
     };
 
@@ -90,9 +93,9 @@ export function CountUp({ value, duration = 1800, className }: CountUpProps) {
   }, [numeric, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
       {prefix}
-      {display}
+      <span ref={numRef}>0</span>
       {suffix}
     </span>
   );

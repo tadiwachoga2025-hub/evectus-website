@@ -1,13 +1,11 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section, SectionHeader } from "@/components/ui/Section";
+import { HairlineGrid, HairlineCell } from "@/components/ui/Hairline";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 const values = [
   {
@@ -50,6 +48,13 @@ const team = [
   },
 ];
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("");
+}
+
 export default function AboutPage() {
   return (
     <>
@@ -64,103 +69,63 @@ export default function AboutPage() {
         />
 
         {/* Our values */}
-        <section className="bg-white px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">Our Values</span>
-              <h2 className="h-section">
-                Three principles. Every engagement.
-              </h2>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-px bg-black/10">
-              {values.map((v, i) => (
-                <motion.div
-                  key={v.label}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="bg-white p-10 flex flex-col gap-4"
-                >
-                  <span className="label text-[#A3A3A3]">{v.label}</span>
-                  <h3 className="h-card">{v.title}</h3>
-                  <p className="body-md text-black/80">{v.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="white">
+          <SectionHeader
+            eyebrow="Our Values"
+            heading="Three principles. Every engagement."
+          />
+          <HairlineGrid columns={3}>
+            {values.map((v) => (
+              <HairlineCell key={v.label}>
+                <span className="label text-[#666666]">{v.label}</span>
+                <h3 className="h-card">{v.title}</h3>
+                <p className="body-md text-black/80">{v.body}</p>
+              </HairlineCell>
+            ))}
+          </HairlineGrid>
+        </Section>
 
         {/* Our team */}
-        <section className="bg-[#f5f5f5] px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">Our Team</span>
-              <h2 className="h-section">
-                Strategists. Technologists. Believers.
-              </h2>
-            </motion.div>
-            <div className="grid grid-cols-4 gap-3 sm:gap-6">
-              {team.map((m, i) => (
-                <motion.div
-                  key={m.name}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  whileHover={{ y: -4 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.1,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="flex flex-col"
-                >
-                  <div className="relative aspect-[3/4] bg-[#A3A3A3] overflow-hidden">
-                    {m.imageSrc && (
-                      <Image
-                        src={m.imageSrc}
-                        alt={`${m.name} — ${m.role}`}
-                        fill
-                        sizes="(min-width: 768px) 25vw, 50vw"
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="p-4 bg-white flex flex-col gap-1">
-                    <span className="text-base font-bold">{m.name}</span>
-                    <span className="text-sm text-[#A3A3A3]">{m.role}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="paper">
+          <SectionHeader
+            eyebrow="Our Team"
+            heading="Strategists. Technologists. Believers."
+          />
+          <RevealGroup className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4">
+            {team.map((m) => (
+              <RevealItem
+                key={m.name}
+                className="flex flex-col transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#1e1e1e]/10">
+                  {m.imageSrc ? (
+                    <Image
+                      src={m.imageSrc}
+                      alt={`${m.name} — ${m.role}`}
+                      fill
+                      sizes="(min-width: 768px) 25vw, 50vw"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                      <span className="h-card text-[#1e1e1e]/40">
+                        {getInitials(m.name)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1 bg-white p-4">
+                  <span className="body-lg font-bold">{m.name}</span>
+                  <span className="label text-[#666666]">{m.role}</span>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </Section>
 
         {/* Where we work */}
-        <section className="bg-white px-6 lg:px-10 py-24">
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-            className="mx-auto max-w-[1440px] flex flex-col gap-6"
-          >
+        <Section tone="white">
+          <Reveal className="flex flex-col gap-6">
             <span className="label">Offices</span>
             <h2 className="h-section">
               Harare. Lagos. Nairobi. Cape Town.
@@ -169,8 +134,8 @@ export default function AboutPage() {
               We operate where our clients are. Our home office is in Harare;
               our project teams deploy across the continent.
             </p>
-          </motion.div>
-        </section>
+          </Reveal>
+        </Section>
 
         <CTABanner
           headline="Meet the team."

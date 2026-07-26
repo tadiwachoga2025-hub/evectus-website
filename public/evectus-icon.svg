@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path d="M15 52 L50 87 L85 52 L70 52 L50 72 L30 52 Z" fill="#0D5FA3"/>
-  <path d="M15 38 L50 73 L85 38 L70 38 L50 58 L30 38 Z" fill="#1A8FD1"/>
-  <path d="M15 22 L50 57 L85 22 L70 22 L50 42 L30 22 Z" fill="#29ABE2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <!-- Three-bar E icon -->
+  <rect x="14" y="16" width="52" height="10" rx="2" fill="#1a1a1a"/>
+  <rect x="14" y="35" width="52" height="10" rx="2" fill="#1a1a1a"/>
+  <rect x="14" y="54" width="52" height="10" rx="2" fill="#1a1a1a"/>
 </svg>

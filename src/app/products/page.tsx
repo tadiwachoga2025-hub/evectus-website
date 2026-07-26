@@ -1,13 +1,12 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section, SectionHeader } from "@/components/ui/Section";
+import { HairlineList, HairlineRow } from "@/components/ui/Hairline";
+import StatStrip from "@/components/ui/StatStrip";
+import { Reveal } from "@/components/ui/Reveal";
 
 type Product = {
   n: string;
@@ -84,6 +83,13 @@ const statusStyles: Record<Product["status"], string> = {
   "In Development": "bg-amber-50 text-amber-700 border-amber-200",
 };
 
+const productStats = [
+  { label: "Products Shipped", value: "5" },
+  { label: "Live in Production", value: "3" },
+  { label: "TypeScript Codebase", value: "100%" },
+  { label: "Year of Operation", value: "2026" },
+];
+
 export default function ProductsPage() {
   return (
     <>
@@ -98,151 +104,106 @@ export default function ProductsPage() {
         />
 
         {/* Products Grid */}
-        <section className="bg-[#f5f5f5] px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">What We&apos;ve Built</span>
-              <h2 className="h-section">
-                Five products. Five problems solved.
-              </h2>
-              <p className="body-lg max-w-2xl">
-                From education technology to legal software, communication
-                infrastructure to media streaming — we build what Africa needs.
-              </p>
-            </motion.div>
+        <Section tone="paper">
+          <SectionHeader
+            eyebrow="What We've Built"
+            heading="Five products. Five problems solved."
+            body="From education technology to legal software, communication infrastructure to media streaming — we build what Africa needs."
+          />
 
-            <div className="flex flex-col gap-px bg-black/10">
-              {products.map((p, i) => (
-                <motion.div
-                  key={p.n}
-                  initial={{ y: 60, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.06,
-                    ease: EASE_OUT_QUART,
-                  }}
+          <HairlineList>
+            {products.map((p) => (
+              <HairlineRow key={p.n} className="p-0">
+                <Link
+                  href="/case-studies"
+                  className="group grid cursor-pointer items-start gap-8 bg-white px-10 py-8 transition-colors duration-300 hover:bg-black hover:text-white md:grid-cols-[1fr_auto] md:px-14 md:py-10"
                 >
-                  <div className="group bg-white p-10 lg:p-14 grid md:grid-cols-[1fr_auto] gap-8 items-start hover:bg-black hover:text-white transition-colors duration-300">
-                    {/* Left: main content */}
-                    <div className="flex flex-col gap-5">
-                      <div className="flex items-center gap-4 flex-wrap">
-                        <span className="label text-[#A3A3A3] group-hover:text-white/50">
-                          {p.n}
-                        </span>
-                        <span
-                          className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${statusStyles[p.status]} group-hover:bg-white/10 group-hover:text-white group-hover:border-white/20`}
-                        >
-                          {p.status}
-                        </span>
-                        <span className="label text-[#A3A3A3] group-hover:text-white/50">
-                          {p.category}
-                        </span>
-                      </div>
-
-                      <div>
-                        <h3 className="h-card mb-1">{p.name}</h3>
-                        <p className="text-lg font-medium text-black/60 group-hover:text-white/60 leading-snug">
-                          {p.tagline}
-                        </p>
-                      </div>
-
-                      <p className="body-md text-black/75 group-hover:text-white/80 max-w-2xl">
-                        {p.description}
-                      </p>
-
-                      {/* Stack tags */}
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        {p.stack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-xs tracking-wide uppercase border border-black/15 group-hover:border-white/20 px-3 py-1 rounded-full text-black/60 group-hover:text-white/60"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right: accent bar + number */}
-                    <div className="hidden md:flex flex-col items-end gap-3 pt-1 shrink-0">
-                      <div
-                        className="w-1 h-20 rounded-full opacity-40 group-hover:opacity-70 transition-opacity"
-                        style={{ backgroundColor: p.accent }}
-                      />
-                      <span
-                        className="text-6xl font-bold leading-none opacity-10 group-hover:opacity-20 tracking-tighter transition-opacity"
-                        aria-hidden="true"
-                      >
+                  {/* Left: main content */}
+                  <div className="flex flex-col gap-5">
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <span className="label text-[#666666] group-hover:text-white/50">
                         {p.n}
                       </span>
+                      <span
+                        className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${statusStyles[p.status]} group-hover:bg-white/10 group-hover:text-white group-hover:border-white/20`}
+                      >
+                        {p.status}
+                      </span>
+                      <span className="label text-[#666666] group-hover:text-white/50">
+                        {p.category}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="h-card mb-1">{p.name}</h3>
+                      <p className="text-lg font-medium text-black/60 group-hover:text-white/60 leading-snug">
+                        {p.tagline}
+                      </p>
+                    </div>
+
+                    <p className="body-md text-black/75 group-hover:text-white/80 max-w-2xl">
+                      {p.description}
+                    </p>
+
+                    {/* Stack tags */}
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {p.stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs tracking-wide uppercase border border-black/15 group-hover:border-white/20 px-3 py-1 rounded-full text-black/60 group-hover:text-white/60"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+
+                  {/* Right: accent bar + number */}
+                  <div className="hidden md:flex flex-col items-end gap-3 pt-1 shrink-0">
+                    <div
+                      className="w-1 h-20 rounded-full opacity-40 group-hover:opacity-70 transition-opacity"
+                      style={{ backgroundColor: p.accent }}
+                    />
+                    <span
+                      className="h-stat leading-none opacity-10 group-hover:opacity-20 transition-opacity"
+                      aria-hidden="true"
+                    >
+                      {p.n}
+                    </span>
+                  </div>
+                </Link>
+              </HairlineRow>
+            ))}
+          </HairlineList>
+        </Section>
 
         {/* Studio statement */}
-        <section className="bg-black text-white px-6 lg:px-10 py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: EASE_OUT_QUART }}
-              className="max-w-4xl"
-            >
-              <span className="label text-white/50 mb-6 block">
-                Our Approach
-              </span>
-              <h2 className="h-section mb-8">
-                We are a product studio, not a body shop.
-              </h2>
-              <p className="body-lg text-white/75 max-w-3xl mb-6">
-                Every product we build solves a real problem that African
-                businesses face. We don&apos;t build for the sake of building —
-                we build because the solution doesn&apos;t exist yet, or
-                because the existing ones weren&apos;t built for us.
-              </p>
-              <p className="body-lg text-white/75 max-w-3xl">
-                When we take on client engagements, we bring the same product
-                discipline — rigorous discovery, rapid iteration, and delivery
-                that works on day one.
-              </p>
-            </motion.div>
+        <Section tone="ink">
+          <SectionHeader
+            eyebrow="Our Approach"
+            heading="We are a product studio, not a body shop."
+            onInk
+          />
+          <Reveal className="-mt-6 max-w-4xl md:-mt-8">
+            <p className="body-lg text-white/75 max-w-3xl mb-6">
+              Every product we build solves a real problem that African
+              businesses face. We don&apos;t build for the sake of building —
+              we build because the solution doesn&apos;t exist yet, or
+              because the existing ones weren&apos;t built for us.
+            </p>
+            <p className="body-lg text-white/75 max-w-3xl">
+              When we take on client engagements, we bring the same product
+              discipline — rigorous discovery, rapid iteration, and delivery
+              that works on day one.
+            </p>
+          </Reveal>
 
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT_QUART }}
-              className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-10 border-t border-white/10 pt-12"
-            >
-              {[
-                { v: "5", l: "Products Shipped" },
-                { v: "3", l: "Live in Production" },
-                { v: "100%", l: "TypeScript Codebase" },
-                { v: "2026", l: "Year of Operation" },
-              ].map((s) => (
-                <div key={s.l} className="flex flex-col gap-2">
-                  <span className="text-5xl md:text-6xl font-bold tracking-tight">
-                    {s.v}
-                  </span>
-                  <span className="label text-white/50">{s.l}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+          <StatStrip
+            stats={productStats}
+            onInk
+            className="mt-16 border-t border-white/10 pt-12"
+          />
+        </Section>
 
         <CTABanner
           headline="Want to build something?"

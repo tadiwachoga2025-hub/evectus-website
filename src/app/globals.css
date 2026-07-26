@@ -1,19 +1,63 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@500,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #000000;
-  --color-paper: #ffffff;
-  --color-mute: #a3a3a3;
-  --color-deep: #171717;
-  --color-mist: #f5f5f5;
+  --font-sans: 'Satoshi', var(--font-inter), sans-serif;
+  --font-display: 'Clash Display', sans-serif;
+  /* Points at --font-playfair, NOT --font-serif. next/font emits its variable
+     onto <html>, the same element as :root, so naming both --font-serif made
+     this a self-reference — a var() cycle that drops font-family entirely. */
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --color-paper: #f2f2f2;
+  --color-ink: #111111;
+  --color-dark: #1e1e1e;
+  --color-muted-gray: #b6b5b5;
+  /* AA-corrected: was #838282 (3.4:1 on paper, fails WCAG AA). #666666 clears 5.1:1. */
+  --color-dark-muted: #666666;
+  --color-layer-1: #bfbfbf;
+  --color-layer-2: #c9c9c9;
+  --color-layer-3: #d1d1d1;
+  --color-layer-4: #d9d9d9;
+
+  /* Single disciplined accent — terracotta, sampled conceptually from the
+     hero's "sunset" photography. Replaces the orphaned #1d70e2 blue that
+     matched no other color in the palette. */
+  --color-accent: #c1552a;      /* 6.7:1 as text on paper */
+  --color-accent-ink: #8c3d1d;  /* 7.5:1 with white text — safe for filled buttons */
+
+  /* Scroll cue dot animation, used by ScrollIndicator.tsx (was referenced
+     by that component but never defined — dormant bug, invisible until
+     the component was actually used). */
+  --animate-scroll-wheel: scroll-wheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-wheel {
+  0%,
+  20% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  61% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 html,
 body {
-  background: #ffffff;
-  color: #000000;
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  background-color: #f2f2f2;
+  color: #111111;
+  font-family: 'Satoshi', var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,42 +66,109 @@ body {
   box-sizing: border-box;
 }
 
+/* Headings — Clash Display */
+.font-clash {
+  font-family: 'Clash Display', sans-serif;
+}
+
+.font-satoshi {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.h-clash-hero {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.h-clash-section {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Semantic type scale
+   These classes are consumed across every inner page
+   (contact, products, about, process, african-agenda,
+   solutions + sub-pages, case-studies) and were previously
+   referenced with no CSS definition, so headings/labels on
+   those pages rendered with unstyled browser defaults.
+   Sizes are fluid (clamp) between a 375px and 1440px viewport.
+   ───────────────────────────────────────────────────────── */
+:root {
+  --fs-label: 0.75rem;                                    /* 12px, fixed */
+  --fs-hero: clamp(3rem, 2.12rem + 3.76vw, 5.5rem);        /* 48px → 88px */
+  --fs-section: clamp(2.25rem, 1.81rem + 1.88vw, 3.5rem);  /* 36px → 56px */
+  --fs-card: clamp(1.75rem, 1.49rem + 1.13vw, 2.5rem);     /* 28px → 40px */
+  --fs-body-lg: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem);/* 18px → 20px */
+  --fs-body-md: clamp(1rem, 0.98rem + 0.09vw, 1.0625rem);  /* 16px → 17px, never below the 16px mobile floor */
+  --fs-stat: clamp(3rem, 2.12rem + 3.76vw, 5.5rem);        /* 48px → 88px */
+}
+
 .label {
-  font-size: 13px;
-  letter-spacing: 0.15em;
+  font-family: 'Satoshi', sans-serif;
+  font-size: var(--fs-label);
+  font-weight: 700;
   text-transform: uppercase;
-  font-weight: 500;
-}
-
-.h-hero {
-  font-size: clamp(40px, 7vw, 80px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-}
-
-.h-section {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-}
-
-.h-card {
-  font-size: clamp(22px, 2vw, 28px);
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.1em;
   line-height: 1.2;
 }
 
+.h-hero {
+  font-family: 'Clash Display', sans-serif;
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.h-section {
+  font-family: 'Clash Display', sans-serif;
+  font-size: var(--fs-section);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.h-card {
+  font-family: 'Clash Display', sans-serif;
+  font-size: var(--fs-card);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Big numerals — stat strips, step numbers, ghost figures. Without this every
+   large number on the site fell back to Satoshi (the body font) because none of
+   them set font-clash, while every heading beside them was Clash Display. */
+.h-stat {
+  font-family: 'Clash Display', sans-serif;
+  font-size: var(--fs-stat);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
 .body-lg {
-  font-size: 18px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: var(--fs-body-lg);
+  font-weight: 500;
   line-height: 1.6;
 }
 
 .body-md {
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Satoshi', sans-serif;
+  font-size: var(--fs-body-md);
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+/* Transitions */
+.transition-swiss {
+  transition: all 700ms cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {

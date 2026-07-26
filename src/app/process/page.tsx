@@ -1,12 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section, SectionHeader } from "@/components/ui/Section";
+import { HairlineGrid, HairlineCell, HairlineList, HairlineRow } from "@/components/ui/Hairline";
 
 const phases = [
   {
@@ -67,87 +64,43 @@ export default function ProcessPage() {
         />
 
         {/* Four phases */}
-        <section className="bg-white px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">Four Phases</span>
-              <h2 className="h-section">
-                Disciplined. Transparent. Repeatable.
-              </h2>
-            </motion.div>
-            <div className="flex flex-col">
-              {phases.map((p, i) => (
-                <motion.div
-                  key={p.n}
-                  initial={{ x: -40, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.1,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="border-t border-black/10 py-12 grid md:grid-cols-[280px_1fr] gap-8"
-                >
-                  <div className="flex flex-col gap-3">
-                    <span className="text-7xl md:text-9xl font-bold leading-none tracking-tight">
-                      {p.n}
-                    </span>
-                    <span className="label text-[#A3A3A3]">{p.label}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <h3 className="h-card mb-3">{p.title}</h3>
-                    <p className="body-lg max-w-2xl text-black/80">{p.body}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="white">
+          <SectionHeader
+            eyebrow="Four Phases"
+            heading="Disciplined. Transparent. Repeatable."
+          />
+          <HairlineList>
+            {phases.map((p) => (
+              <HairlineRow key={p.n} className="grid md:grid-cols-[280px_1fr] gap-8">
+                <div className="flex flex-col gap-3">
+                  <span className="h-stat">{p.n}</span>
+                  <span className="label text-[#666666]">{p.label}</span>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="h-card mb-3">{p.title}</h3>
+                  <p className="body-lg max-w-2xl text-black/80">{p.body}</p>
+                </div>
+              </HairlineRow>
+            ))}
+          </HairlineList>
+        </Section>
 
         {/* What you can expect */}
-        <section className="bg-[#f5f5f5] px-6 lg:px-10 py-24">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">What You Can Expect</span>
-              <h2 className="h-section">
-                A working rhythm built around your team.
-              </h2>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-10">
-              {expectations.map((e, i) => (
-                <motion.div
-                  key={e.label}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="flex flex-col gap-4"
-                >
-                  <span className="label text-[#A3A3A3]">{e.label}</span>
-                  <h3 className="h-card">{e.title}</h3>
-                  <p className="body-md text-black/80">{e.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="paper">
+          <SectionHeader
+            eyebrow="What You Can Expect"
+            heading="A working rhythm built around your team."
+          />
+          <HairlineGrid columns={3}>
+            {expectations.map((e) => (
+              <HairlineCell key={e.label}>
+                <span className="label text-[#666666]">{e.label}</span>
+                <h3 className="h-card">{e.title}</h3>
+                <p className="body-md text-black/80">{e.body}</p>
+              </HairlineCell>
+            ))}
+          </HairlineGrid>
+        </Section>
 
         <CTABanner
           headline="See how we work."

@@ -1,12 +1,14 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section, SectionHeader } from "@/components/ui/Section";
+import {
+  HairlineGrid,
+  HairlineCell,
+  HairlineList,
+  HairlineRow,
+} from "@/components/ui/Hairline";
 
 const deliverables = [
   {
@@ -56,86 +58,42 @@ export default function StrategicConsultingPage() {
         />
 
         {/* What we deliver */}
-        <section className="bg-white px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="grid md:grid-cols-2 gap-12 mb-16 items-end"
-            >
-              <span className="label">What We Deliver</span>
-              <h2 className="h-section">
-                Strategy built for the African context.
-              </h2>
-            </motion.div>
-
-            <div>
-              {deliverables.map((d, i) => (
-                <motion.div
-                  key={d.n}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="grid md:grid-cols-[120px_1fr_2fr] gap-8 items-start border-t border-black/10 py-12"
-                >
-                  <span className="text-7xl md:text-8xl font-bold leading-none tracking-tight">
-                    {d.n}
-                  </span>
-                  <h3 className="text-2xl font-bold tracking-tight">
-                    {d.title}
-                  </h3>
-                  <p className="body-lg text-black/80">{d.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="white">
+          <SectionHeader
+            eyebrow="What We Deliver"
+            heading="Strategy built for the African context."
+          />
+          <HairlineList>
+            {deliverables.map((d) => (
+              <HairlineRow
+                key={d.n}
+                className="grid md:grid-cols-[120px_1fr_2fr] gap-8 items-start"
+              >
+                <span className="h-stat">{d.n}</span>
+                <h3 className="h-card">{d.title}</h3>
+                <p className="body-lg text-black/80">{d.body}</p>
+              </HairlineRow>
+            ))}
+          </HairlineList>
+        </Section>
 
         {/* Engagement formats */}
-        <section className="bg-[#f5f5f5] px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">Engagement Formats</span>
-              <h2 className="h-section">Match the work to the moment.</h2>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-px bg-black/10">
-              {formats.map((f, i) => (
-                <motion.div
-                  key={f.title}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="bg-white p-10 lg:p-12 flex flex-col gap-4"
-                >
-                  <span className="label text-[#A3A3A3]">Format</span>
-                  <h3 className="text-2xl lg:text-3xl font-bold tracking-tight">
-                    {f.title}
-                  </h3>
-                  <span className="label">{f.duration}</span>
-                  <p className="body-md text-black/80">{f.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="white">
+          <SectionHeader
+            eyebrow="Engagement Formats"
+            heading="Match the work to the moment."
+          />
+          <HairlineGrid columns={3}>
+            {formats.map((f) => (
+              <HairlineCell key={f.title}>
+                <span className="label text-[#666666]">Format</span>
+                <h3 className="h-card">{f.title}</h3>
+                <span className="label">{f.duration}</span>
+                <p className="body-md text-black/80">{f.body}</p>
+              </HairlineCell>
+            ))}
+          </HairlineGrid>
+        </Section>
 
         <CTABanner
           headline="Strategize with us."

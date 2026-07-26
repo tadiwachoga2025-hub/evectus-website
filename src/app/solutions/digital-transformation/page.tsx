@@ -1,12 +1,10 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section, SectionHeader } from "@/components/ui/Section";
+import { HairlineGrid, HairlineCell } from "@/components/ui/Hairline";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 const capabilities = [
   {
@@ -42,112 +40,61 @@ export default function DigitalTransformationPage() {
         />
 
         {/* The Challenge */}
-        <section className="bg-white px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px] grid md:grid-cols-2 gap-12 items-start">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-6"
-            >
-              <span className="label">The Challenge</span>
-              <h2 className="h-section">
-                Many organizations want to digitize but fear the disruption.
-              </h2>
-            </motion.div>
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-6"
-            >
-              <p className="body-lg">
-                They face siloed data, outdated hardware, and resistant teams.
-                This is the &ldquo;ordinary&rdquo; trap — the assumption that
-                transformation must be painful, slow, and expensive. We
-                disagree.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <Section
+          tone="white"
+          innerClassName="grid md:grid-cols-2 gap-12 items-start"
+        >
+          <Reveal className="flex flex-col gap-6">
+            <span className="label">The Challenge</span>
+            <h2 className="h-section">
+              Many organizations want to digitize but fear the disruption.
+            </h2>
+          </Reveal>
+          <Reveal className="flex flex-col gap-6" delay={0.1}>
+            <p className="body-lg">
+              They face siloed data, outdated hardware, and resistant teams.
+              This is the &ldquo;ordinary&rdquo; trap — the assumption that
+              transformation must be painful, slow, and expensive. We
+              disagree.
+            </p>
+          </Reveal>
+        </Section>
 
         {/* Our Solution */}
-        <section className="bg-[#f5f5f5] px-6 lg:px-10 py-24 md:py-32">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">The Evectus Solution</span>
-              <h2 className="h-section">We handle the entire lifecycle.</h2>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-px bg-black/10">
-              {capabilities.map((c, i) => (
-                <motion.div
-                  key={c.title}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="bg-white p-10 flex flex-col gap-3"
-                >
-                  <h3 className="text-2xl font-bold tracking-tight">
-                    {c.title}
-                  </h3>
-                  <p className="body-md text-black/80">{c.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Section tone="paper">
+          <SectionHeader
+            eyebrow="The Evectus Solution"
+            heading="We handle the entire lifecycle."
+          />
+          <HairlineGrid columns={3}>
+            {capabilities.map((c) => (
+              <HairlineCell key={c.title}>
+                <h3 className="h-card">{c.title}</h3>
+                <p className="body-md text-black/80">{c.body}</p>
+              </HairlineCell>
+            ))}
+          </HairlineGrid>
+        </Section>
 
         {/* Process snapshot */}
-        <section className="bg-white px-6 lg:px-10 py-24">
-          <div className="mx-auto max-w-[1440px]">
-            <motion.div
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, ease: EASE_OUT_QUART }}
-              className="flex flex-col gap-4 mb-16 max-w-3xl"
-            >
-              <span className="label">Process Snapshot</span>
-              <h2 className="h-section">
-                From audit to adoption in 90 days.
-              </h2>
-            </motion.div>
+        <Section tone="white">
+          <SectionHeader
+            eyebrow="Process Snapshot"
+            heading="From audit to adoption in 90 days."
+          />
+          <RevealGroup>
             <ol className="grid grid-cols-2 md:grid-cols-4 gap-10 border-t border-black/10 pt-12">
-              {steps.map((s, i) => (
-                <motion.li
-                  key={s.n}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="flex flex-col gap-3"
-                >
-                  <span className="text-5xl md:text-6xl font-bold tracking-tight">
-                    {s.n}
-                  </span>
-                  <span className="label text-[#A3A3A3]">{s.label}</span>
-                </motion.li>
+              {steps.map((s) => (
+                <li key={s.n}>
+                  <RevealItem className="flex flex-col gap-3">
+                    <span className="h-stat">{s.n}</span>
+                    <span className="label text-[#666666]">{s.label}</span>
+                  </RevealItem>
+                </li>
               ))}
             </ol>
-          </div>
-        </section>
+          </RevealGroup>
+        </Section>
 
         <CTABanner
           headline="Start your digital journey."

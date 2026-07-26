@@ -1,6 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 100">
-  <path d="M15 52 L50 87 L85 52 L70 52 L50 72 L30 52 Z" fill="#0D5FA3"/>
-  <path d="M15 38 L50 73 L85 38 L70 38 L50 58 L30 38 Z" fill="#1A8FD1"/>
-  <path d="M15 22 L50 57 L85 22 L70 22 L50 42 L30 22 Z" fill="#29ABE2"/>
-  <text x="90" y="68" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="62" letter-spacing="-1" fill="#0B1A3E">Evectus</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 64">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Michroma&amp;display=swap');
+  </style>
+
+  <!-- E: three horizontal bars -->
+  <rect x="2"   y="18" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+  <rect x="2"   y="30" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+  <rect x="2"   y="42" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+
+  <!-- V -->
+  <text x="62"  y="48" font-family="Michroma, sans-serif" font-size="42" text-anchor="middle" fill="#1a1a1a">V</text>
+
+  <!-- E: three horizontal bars -->
+  <rect x="94"  y="18" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+  <rect x="94"  y="30" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+  <rect x="94"  y="42" width="28" height="5" rx="1.5" fill="#1a1a1a"/>
+
+  <!-- C -->
+  <text x="155" y="48" font-family="Michroma, sans-serif" font-size="42" text-anchor="middle" fill="#1a1a1a">C</text>
+
+  <!-- T -->
+  <text x="201" y="48" font-family="Michroma, sans-serif" font-size="42" text-anchor="middle" fill="#1a1a1a">T</text>
+
+  <!-- U -->
+  <text x="249" y="48" font-family="Michroma, sans-serif" font-size="42" text-anchor="middle" fill="#1a1a1a">U</text>
+
+  <!-- S -->
+  <text x="296" y="48" font-family="Michroma, sans-serif" font-size="42" text-anchor="middle" fill="#1a1a1a">S</text>
 </svg>

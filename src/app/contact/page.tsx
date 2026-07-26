@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Button } from "@/components/ui/neon-button";
-
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
+import { Section } from "@/components/ui/Section";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 const contactInfo = [
   { k: "OFFICE", v: "Harare, Zimbabwe" },
@@ -25,7 +24,7 @@ const services = [
 ];
 
 const inputClass =
-  "w-full h-12 px-4 border border-black/20 bg-white text-base focus:outline-none focus:border-black transition-colors";
+  "w-full h-12 px-4 border border-black/20 bg-white text-base transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c1552a]";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
 
@@ -42,6 +41,13 @@ export default function ContactPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [form, setForm] = useState(initialForm);
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (status === "sent") {
+      successHeadingRef.current?.focus();
+    }
+  }, [status]);
 
   const update =
     (key: keyof typeof form) =>
@@ -116,50 +122,39 @@ export default function ContactPage() {
           imageAlt="Conversation between two people at a desk"
         />
 
-        <section className="bg-white py-24 md:py-32 px-6 lg:px-10">
-          <div className="mx-auto max-w-[1440px] grid md:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20">
-            {/* Left: contact info */}
-            <div className="flex flex-col gap-10">
-              {contactInfo.map((c, i) => (
-                <motion.div
-                  key={c.k}
-                  initial={{ x: -30, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE_OUT_QUART,
-                  }}
-                  className="flex flex-col gap-2"
-                >
-                  <span className="uppercase tracking-widest text-[#A3A3A3] text-xs">
-                    {c.k}
-                  </span>
-                  {c.href ? (
-                    <a
-                      href={c.href}
-                      className="text-xl font-medium hover:opacity-60 transition-opacity"
-                    >
-                      {c.v}
-                    </a>
-                  ) : (
-                    <span className="text-xl font-medium">{c.v}</span>
-                  )}
-                </motion.div>
-              ))}
-            </div>
+        <Section
+          tone="white"
+          innerClassName="grid md:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20"
+        >
+          {/* Left: contact info */}
+          <RevealGroup className="flex flex-col gap-10">
+            {contactInfo.map((c) => (
+              <RevealItem key={c.k} className="flex flex-col gap-2">
+                <span className="label text-[#666666]">{c.k}</span>
+                {c.href ? (
+                  <a
+                    href={c.href}
+                    className="text-xl font-medium hover:opacity-60 transition-opacity"
+                  >
+                    {c.v}
+                  </a>
+                ) : (
+                  <span className="text-xl font-medium">{c.v}</span>
+                )}
+              </RevealItem>
+            ))}
+          </RevealGroup>
 
-            {/* Right: form */}
-            <div>
-              {status === "sent" ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: EASE_OUT_QUART }}
-                  className="flex flex-col gap-4 items-start"
-                >
-                  <h2 className="h-section">
+          {/* Right: form */}
+          <div>
+            {status === "sent" ? (
+              <div role="status" aria-live="polite">
+                <Reveal y={20} className="flex flex-col gap-4 items-start">
+                  <h2
+                    className="h-section"
+                    tabIndex={-1}
+                    ref={successHeadingRef}
+                  >
                     Thanks — we&rsquo;ll be in touch within 24 hours.
                   </h2>
                   <button
@@ -169,30 +164,17 @@ export default function ContactPage() {
                   >
                     Send another message
                   </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={onSubmit} className="flex flex-col gap-6">
-                  <motion.h2
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, ease: EASE_OUT_QUART }}
-                    className="h-section"
-                  >
-                    Tell us about your challenge.
-                  </motion.h2>
+                </Reveal>
+              </div>
+            ) : (
+              <form onSubmit={onSubmit} aria-busy={status === "sending"}>
+                <RevealGroup className="flex flex-col gap-6">
+                  <RevealItem>
+                    <h2 className="h-section">Tell us about your challenge.</h2>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.06, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="fullName"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="fullName" className="label text-[#666666]">
                       Full Name
                     </label>
                     <input
@@ -203,19 +185,10 @@ export default function ContactPage() {
                       onChange={update("fullName")}
                       className={inputClass}
                     />
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="organization"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="organization" className="label text-[#666666]">
                       Organization
                     </label>
                     <input
@@ -225,19 +198,10 @@ export default function ContactPage() {
                       onChange={update("organization")}
                       className={inputClass}
                     />
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.18, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="email"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="email" className="label text-[#666666]">
                       Email
                     </label>
                     <input
@@ -248,19 +212,10 @@ export default function ContactPage() {
                       onChange={update("email")}
                       className={inputClass}
                     />
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.24, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="phone"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="phone" className="label text-[#666666]">
                       Phone
                     </label>
                     <input
@@ -270,19 +225,10 @@ export default function ContactPage() {
                       onChange={update("phone")}
                       className={inputClass}
                     />
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.3, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="service"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="service" className="label text-[#666666]">
                       Service of Interest
                     </label>
                     <select
@@ -297,19 +243,10 @@ export default function ContactPage() {
                         </option>
                       ))}
                     </select>
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.36, ease: EASE_OUT_QUART }}
-                    className="flex flex-col gap-2"
-                  >
-                    <label
-                      htmlFor="message"
-                      className="uppercase text-xs tracking-widest text-[#A3A3A3]"
-                    >
+                  <RevealItem className="flex flex-col gap-2">
+                    <label htmlFor="message" className="label text-[#666666]">
                       Message
                     </label>
                     <textarea
@@ -317,17 +254,11 @@ export default function ContactPage() {
                       required
                       value={form.message}
                       onChange={update("message")}
-                      className="w-full h-32 px-4 py-3 border border-black/20 bg-white text-base focus:outline-none focus:border-black transition-colors resize-none"
+                      className={`${inputClass} h-32 py-3 resize-none`}
                     />
-                  </motion.div>
+                  </RevealItem>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.42, ease: EASE_OUT_QUART }}
-                    className="mt-4 flex flex-col gap-3 items-start"
-                  >
+                  <RevealItem className="mt-4 flex flex-col gap-3 items-start">
                     <Button
                       type="submit"
                       variant="primary"
@@ -336,7 +267,7 @@ export default function ContactPage() {
                       {status === "sending" ? "Sending…" : "Send Message"}
                     </Button>
                     {status === "error" && (
-                      <p className="text-red-600 text-sm">
+                      <p className="text-red-600 text-sm" role="alert">
                         {errorMessage ?? "Something went wrong."} Please try
                         again or email us directly at{" "}
                         <a
@@ -348,12 +279,12 @@ export default function ContactPage() {
                         .
                       </p>
                     )}
-                  </motion.div>
-                </form>
-              )}
-            </div>
+                  </RevealItem>
+                </RevealGroup>
+              </form>
+            )}
           </div>
-        </section>
+        </Section>
       </main>
       <Footer />
     </>

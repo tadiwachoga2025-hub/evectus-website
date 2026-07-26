@@ -2,32 +2,19 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { EASE } from "@/components/ui/Reveal";
 
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const;
-
-const container = {
-  hidden: { opacity: 1 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05, delayChildren: 0.1 },
-  },
-};
-
-const word = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: EASE_OUT_QUART },
-  },
-};
+// Was a 12th local copy of [0.22, 1, 0.36, 1]. It shipped on nine pages, each
+// directly above a CTABanner animating on the shared curve — so a single scroll
+// ran two different easings. Now both use EASE.
+const EASE_OUT_QUART = EASE;
 
 export default function PageHero({
   label,
   headline,
   body,
-  imageSrc = "https://images.unsplash.com/photo-1497366216548-37526070297c?w=2000&q=80",
-  imageAlt = "",
+  imageSrc = "/hero-team.jpg",
+  imageAlt = "Evectus team collaborating on business growth",
 }: {
   label: string;
   headline: string;
@@ -35,62 +22,51 @@ export default function PageHero({
   imageSrc?: string;
   imageAlt?: string;
 }) {
-  const words = headline.split(" ");
-  // Approximate end of headline stagger: delayChildren (0.1) + words * stagger (0.05) + word duration (0.7)
-  const bodyDelay = 0.1 + words.length * 0.05 + 0.2;
-
   return (
-    <section className="relative bg-black text-white pt-40 pb-28 px-6 lg:px-10 overflow-hidden">
+    <section className="relative flex min-h-[480px] flex-col justify-end overflow-hidden bg-neutral-900 text-white md:min-h-[580px] lg:min-h-[640px]">
       <Image
         src={imageSrc}
         alt={imageAlt}
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-60"
+        className="scale-105 object-cover"
       />
-      <div className="absolute inset-0 bg-black/55 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/65" />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] flex flex-col gap-6">
-        <motion.span
-          className="label text-white/70"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: EASE_OUT_QUART }}
-        >
-          {label}
-        </motion.span>
-        <motion.h1
-          className="h-hero max-w-5xl"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          {words.map((w, i) => (
-            <motion.span
-              key={`${w}-${i}`}
-              variants={word}
-              className="inline-block mr-[0.25em]"
-            >
-              {w}
-            </motion.span>
-          ))}
-        </motion.h1>
-        {body && (
+      <div className="relative z-10 w-full px-6 pb-20 pt-32 md:px-12 md:pb-28 md:pt-40 lg:px-20">
+        <div className="mr-auto max-w-[820px]">
           <motion.p
-            className="body-lg max-w-2xl text-white/80"
+            className="text-xs uppercase tracking-widest text-white/90 drop-shadow-sm"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 0.7,
-              ease: EASE_OUT_QUART,
-              delay: bodyDelay,
-            }}
+            transition={{ duration: 0.6, ease: EASE_OUT_QUART }}
           >
-            {body}
+            {label}
           </motion.p>
-        )}
+          <motion.h1
+            className="mt-6 font-serif text-[2.4rem] font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-6xl drop-shadow-md"
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, ease: EASE_OUT_QUART, delay: 0.1 }}
+          >
+            {headline}
+          </motion.h1>
+          {body && (
+            <motion.p
+              className="mt-6 max-w-[56ch] text-lg leading-relaxed text-white/80 md:text-xl drop-shadow-sm"
+              initial={{ y: 24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 0.7,
+                ease: EASE_OUT_QUART,
+                delay: 0.2,
+              }}
+            >
+              {body}
+            </motion.p>
+          )}
+        </div>
       </div>
     </section>
   );
