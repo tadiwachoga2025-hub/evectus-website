@@ -56,7 +56,7 @@ exactly what Vertex lacks: real work, real proof, and a live contact path.
 |---|---|---|---|
 | 1 | Sticky nav | Vertex | Transparent over hero, solid on scroll. |
 | 2 | Hero | Vertex | Retains the Clash-bold + serif-italic two-line device. Gains a secondary CTA. |
-| 3 | Proof strip | New | Client wordmarks. Vertex has no equivalent. |
+| 3 | Outcomes strip | New | Quantified results. Vertex has no proof of any kind. |
 | 4 | Problem | Vertex | Same narrative beat, informational rather than decorative visuals. |
 | 5 | Capabilities | Vertex §5 + §7 merged | Four solutions, each deep-linked to its real child route. |
 | 6 | Featured work | New | SchoolPulse, LegalPro, Healing Institute TV. |
@@ -93,11 +93,15 @@ headline. Changes:
   design system pass; that blue currently matches nothing else on the site.
 - Adds a single-line proof statement beneath the CTA row.
 
-### 3. Proof strip
+### 3. Outcomes strip
 
-Renders from `CLIENTS: { name: string; logo?: string }[]`, declared at the top of
-the file and **initially empty**. When empty the section does not render. Text
-wordmarks are the default treatment; a `logo` path overrides with an image.
+A grayscale client-logo marquee is the most common SaaS cliché, and an
+under-filled one reads as padding. No logo assets were supplied, so the section
+instead uses the four figures already published on `/case-studies` — 5 products
+shipped, 100% on-time delivery, 95% milestone hit-rate, 100% partner retention —
+rendered through the existing `CountUp` component on a hairline-bounded row.
+
+Nothing here is invented; every number was already live on the site.
 
 ### 4. Problem
 
@@ -156,10 +160,37 @@ accent token.
 
 ## Design tokens
 
-Supplied by the UI/UX pass (`ui-ux-pro-max` + `frontend-design`) and applied to
-the `@theme` block in `src/app/globals.css`. Covers the semantic colour ramp,
-fluid type scale, spacing rhythm, radius and elevation scales, and motion
-tokens. Recorded here once the pass lands so the values live in one place.
+Delivered by the UI/UX pass (`ui-ux-pro-max` + `frontend-design`) and specified
+in full in Task 1 of the implementation plan. Headline decisions:
+
+- **Accent: terracotta** `#c1552a` / `#8c3d1d`, replacing the orphaned
+  `#1d70e2`. The blue appears in no token, no button variant, and no other
+  component — it is the only hue in an otherwise achromatic system, on the
+  site's most visible button. The terracotta measures 7.5:1 with white text
+  against the blue's 4.7:1, and takes its hue from the sunset in the hero
+  photograph.
+- **Warmer neutrals:** paper moves `#f2f2f2` → `#f4f3f0`, ink `#111111` →
+  `#14120f`.
+- **Body text:** `#838282` (3.39:1, fails AA) → `#666666` (5.13:1).
+- Fluid `clamp()` type scale, semantic spacing rhythm, a radius scale that bars
+  full-radius on photography, flat offset shadows, and motion tokens
+  centralising two easing curves currently duplicated across three files.
+
+## Pre-existing bugs found during the design pass
+
+Not part of the original brief. All three were verified against the codebase
+before being written up.
+
+1. **Five type utilities — `h-section`, `h-card`, `body-lg`, `body-md`,
+   `label` — are used 53 times across 11 of the 12 route files and defined
+   nowhere.** Every heading and paragraph outside the homepage renders at
+   browser-default size. Fixing this was approved as a scope extension and
+   carries a mandatory audit of all 11 pages.
+2. **The Solutions dropdown cannot be opened by keyboard or touch.**
+   `isSolutionsOpen` is declared and toggled but never read; visibility is
+   driven purely by `group-hover`. A WCAG 2.1.1 failure.
+3. **The shared focus ring is `#111111` on `#111111` surfaces** — invisible on
+   the dark CTA band and the mobile drawer.
 
 ---
 

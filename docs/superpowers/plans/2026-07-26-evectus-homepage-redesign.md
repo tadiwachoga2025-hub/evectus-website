@@ -11,7 +11,8 @@
 ## Global Constraints
 
 - **`src/components/Footer.tsx` is off-limits.** Do not read, modify, or restyle it.
-- Homepage only. Do not modify the 11 other routes. Shared components may be added, but existing shared components may only be changed in ways that leave other routes rendering identically.
+- Homepage only **for markup**. Do not modify the 11 other route files' JSX, with the two named exceptions in Task 1B (the audit) and Task 7 (case-study anchor ids).
+- **Task 1B is a deliberate, approved scope extension.** Five utility classes referenced 53 times across 11 route files are undefined; defining them changes how those pages render. This was raised and accepted, and carries a full audit.
 - **No fabricated content.** No invented client names, testimonial quotes, statistics, dates, or metrics. Sections lacking real data render nothing.
 - **Next.js 16 — `images.qualities` defaults to `[75]`.** Any `quality` prop not in that array is silently coerced to the nearest allowed value. Declare qualities in `next.config.ts` before using any other value.
 - **Next.js 16 — scroll-behavior override removed.** Next no longer resets `scroll-behavior` during navigation. `data-scroll-behavior="smooth"` must be set on `<html>` for route changes to scroll to top correctly.
@@ -55,46 +56,88 @@ Replace lines 4–17 with:
 
 ```css
 @theme {
+  /* Fonts — pairing unchanged; Clash + Satoshi + Playfair-italic is already
+     a stronger, more specific choice than any stock "editorial" pairing. */
   --font-sans: 'Satoshi', var(--font-inter), sans-serif;
   --font-display: 'Clash Display', sans-serif;
   --font-serif: var(--font-serif), 'Playfair Display', Georgia, serif;
 
-  /* Surfaces — light to dark */
-  --color-paper: #f2f2f2;
-  --color-surface: #ffffff;
-  --color-surface-sunken: #e8e8e8;
-  --color-ink: #111111;
-  --color-ink-soft: #1e1e1e;
+  /* Surfaces — warmer than the previous flat, slightly cold greys */
+  --color-paper: #f4f3f0;
+  --color-paper-raised: #fffdfa;
+  --color-paper-sunken: #e9e7e1;
+  --color-surface-inverse: #14120f;
+  --color-surface-inverse-raised: #201d19;
 
-  /* Text tiers — all AA on paper */
-  --color-text: #111111;
-  --color-text-muted: #5c5c5c;
-  --color-text-subtle: #6e6e6e;
-  --color-text-inverse: #f2f2f2;
+  /* Text tiers — every value below is AA-verified, see table */
+  --color-text-primary: #14120f;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8f8f8f;   /* DECORATIVE ONLY — never body text */
+  --color-text-inverse: #f4f3f0;
+  --color-text-inverse-secondary: #b8b3ac;
 
-  /* Borders */
-  --color-border: rgba(30, 30, 30, 0.12);
-  --color-border-strong: rgba(30, 30, 30, 0.24);
+  /* Hairlines */
+  --color-line: rgb(20 18 15 / 10%);
+  --color-line-strong: rgb(20 18 15 / 22%);
+  --color-line-inverse: rgb(244 243 240 / 14%);
 
-  /* Accent — replaces the orphaned #1d70e2 */
-  --color-accent: #b45309;
-  --color-accent-hover: #92400e;
+  /* The one accent — terracotta, replacing the orphaned #1d70e2 */
+  --color-accent: #c1552a;
+  --color-accent-ink: #8c3d1d;
+  --color-accent-soft: #f2e3d8;
 
-  /* Fluid type scale */
-  --text-display: clamp(2.75rem, 1.5rem + 6vw, 6rem);
-  --text-h1: clamp(2.25rem, 1.4rem + 4vw, 4.5rem);
-  --text-h2: clamp(1.875rem, 1.3rem + 2.6vw, 3.25rem);
-  --text-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
-  --text-eyebrow: 0.6875rem;
+  /* Fluid type scale — interpolated 375px → 1440px viewport */
+  --text-micro: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: clamp(0.875rem, 0.85rem + 0.09vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.98rem + 0.09vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem);
+  --text-xl: clamp(1.375rem, 1.24rem + 0.56vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.49rem + 1.13vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.81rem + 1.88vw, 3.5rem);
+  --text-4xl: clamp(3rem, 2.12rem + 3.76vw, 5.5rem);
+  --text-display: clamp(3.5rem, 1.92rem + 6.76vw, 8rem);
 
-  /* Motion */
-  --ease-swiss: cubic-bezier(0.77, 0, 0.175, 1);
-  --duration-base: 700ms;
+  /* Spacing rhythm — replaces the py-24/28/32/36/44 sprawl */
+  --space-section-y: clamp(4rem, 3rem + 4vw, 8rem);
+  --space-section-x: clamp(1.5rem, 1rem + 2vw, 3rem);
+  --space-gutter: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+
+  /* Radius — full radius is for buttons/tags/logo glyph, NEVER photography */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-full: 9999px;
+
+  /* Elevation — flat offset, matching the hairline language */
+  --shadow-card: 6px 6px 0 0 rgb(20 18 15 / 100%);
+  --shadow-card-accent: 6px 6px 0 0 var(--color-accent-ink);
+  --shadow-dropdown: 0 8px 24px -8px rgb(20 18 15 / 24%);
+  --shadow-modal: 0 24px 64px -16px rgb(20 18 15 / 32%);
+
+  /* Motion — centralizes two curves currently hardcoded in 3+ files */
+  --ease-swiss-inout: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-instant: 120ms;
   --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-reveal: 800ms;
 }
 ```
 
-**Why `#b45309`:** it reaches 4.6:1 on `#f2f2f2` (AA for normal text) and 5.9:1 on `#ffffff`, sits in the same warm register as the existing sunset hero photograph, and unlike `#1d70e2` it is not the only cool hue in an otherwise neutral palette. `--color-text-muted: #5c5c5c` replaces `#838282`, which measures **3.2:1** on paper and **fails** AA for body copy.
+**Why terracotta and not the blue.** `#1d70e2` appears nowhere in `@theme`, nowhere in `neon-button`'s four variants, nowhere in `CTABanner` — it is the single hue in an otherwise fully achromatic system, sitting on the highest-visibility button on the site. Running this brief through a generic design-system generator with no knowledge of the palette returned `#0369A1` for "enterprise consulting", which is to say the current CTA colour is statistically the template default in the one place where looking generic costs most.
+
+`#8c3d1d` measures **7.5:1** with white text (against the blue's fragile 4.7:1), and `#c1552a` measures **6.7:1** as text on paper. The hue is drawn from the hero photograph's own sunset — `PrimeNestHero.tsx:18` describes it as such in its alt text.
+
+**Contrast corrections this replaces:**
+
+| Old value | Where | Measured | Replacement |
+|---|---|---|---|
+| `#838282` | body copy sitewide | **3.39:1** on paper — fails AA | `--color-text-secondary` at 5.13:1 |
+| `#838282` | on white card hover | **3.79:1** — fails AA | same |
+| `#A3A3A3` | stat captions, `case-studies:96` | **2.52:1** — fails even the 3:1 large-text floor, at 14px | same |
+| `#1d70e2` | hero CTA | 4.7:1 — passes with no margin | `--color-accent-ink` at 7.5:1 |
 
 - [ ] **Step 2: Declare image qualities in `next.config.ts`**
 
@@ -150,6 +193,146 @@ git commit -m "feat: add semantic token system, fix image qualities and scroll b
 
 ---
 
+### Task 1B: Define the missing type utilities, then audit all 11 affected pages
+
+**Files:**
+- Modify: `src/app/globals.css` (append after the `@theme` block)
+- Audit only (no edits unless the audit finds breakage): the 11 route files listed below.
+
+**Interfaces:**
+- Consumes: tokens from Task 1.
+- Produces: five working utilities — `.h-section`, `.h-card`, `.body-lg`, `.body-md`, `.label`.
+
+**The bug.** These five class names are used **53 times across 11 of the 12 route files** and are defined nowhere — not in `globals.css`, not as a Tailwind v4 `@utility`, not in any component. Verified:
+
+```
+$ grep -rE '@utility (h-section|h-card|body-md|body-lg|label)' src/
+>>> NO DEFINITIONS FOUND
+$ grep -rohE 'className="[^"]*\b(h-section|h-card|body-md|body-lg)\b' src/ | wc -l
+53
+```
+
+Consequence: every heading and paragraph on `/about`, `/solutions` (+4 children), `/products`, `/case-studies`, `/process`, `/african-agenda` and `/contact` currently renders at browser-default size with no tracking, weight, or line-height. The homepage is the only route whose typography actually exists. Defining these makes 11 pages start rendering as designed — **which is why the audit in Step 3 is mandatory, not optional.**
+
+- [ ] **Step 1: Capture before-screenshots**
+
+```bash
+npm run dev
+```
+With the dev server running, visit and screenshot each of the 11 routes below. Keep them — Step 3 compares against these.
+
+```
+/about  /solutions  /solutions/digital-transformation
+/solutions/strategic-consulting  /solutions/technology-development
+/solutions/operational-excellence  /products  /case-studies
+/process  /african-agenda  /contact
+```
+
+- [ ] **Step 2: Append the utilities to `src/app/globals.css`**
+
+Tailwind v4 defines custom utilities with `@utility`, not `@layer components`.
+
+```css
+@utility h-section {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--color-text-primary);
+}
+
+@utility h-card {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+@utility body-lg {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+@utility body-md {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+@utility label {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-secondary);
+}
+```
+
+Note `.label` sets its own colour. `case-studies/page.tsx:96` currently writes `className="label text-[#A3A3A3]"` — that inline `#A3A3A3` measures **2.52:1** and will override the utility. Remove the `text-[#A3A3A3]` from that one call site; it is the only place a dead class is paired with a failing inline colour.
+
+- [ ] **Step 3: Audit all 11 routes against the before-screenshots**
+
+```bash
+npm run build && npm run dev
+```
+
+For **each** of the 11 routes, confirm:
+- Headings are now visibly larger and tighter, not browser-default.
+- No text overflows its container or triggers horizontal scroll at 360px.
+- No heading collides with an adjacent element that previously had room because the text was small.
+- Any element that set its own font-size alongside these classes still wins where intended.
+
+Record any route that broke, fix it in that route's file, and note the fix in the commit body.
+
+- [ ] **Step 4: Fix the invisible focus ring in `src/components/ui/neon-button.tsx:17`**
+
+Verified current value:
+
+```
+17: "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#111111]",
+18: "disabled:pointer-events-none disabled:opacity-50",
+```
+
+`ring-[#111111]` against the `#111111` dark CTA band and the dark mobile drawer gives **zero** visible contrast — keyboard users lose focus entirely on those surfaces. Replace line 17's ring colour:
+
+```
+"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-accent)]",
+```
+
+The accent contrasts against both paper and ink, so one value covers every surface. This is a shared component — the change is strictly additive to accessibility and leaves every existing call site rendering identically apart from the focus state.
+
+- [ ] **Step 5: Verify no dead classes or failing colours remain**
+
+```bash
+npm run lint && npm run build
+rg -n 'text-\[#A3A3A3\]|ring-\[#111111\]' src/ || echo "clean"
+```
+Expected: build and lint pass; the grep returns nothing.
+
+**Acceptance checks:**
+- All 11 routes render with real typography.
+- Tabbing to a button on the dark CTA band shows a clearly visible terracotta focus ring.
+- `git diff --stat src/components/Footer.tsx` is empty.
+- No route regressed at 360px.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add src/app/globals.css src/app/case-studies/page.tsx src/components/ui/neon-button.tsx
+git commit -m "fix: define five undeclared type utilities and repair focus ring contrast"
+```
+
+---
+
 ### Task 2: Extract SiteNav out of the hero
 
 **Files:**
@@ -189,6 +372,7 @@ const NAV_LINKS = [
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -211,21 +395,37 @@ export function SiteNav() {
         </Link>
 
         <nav className="hidden items-center gap-8 font-sans text-sm md:flex">
-          <div className="group relative">
+          <div
+            className="group relative"
+            onMouseEnter={() => setSolutionsOpen(true)}
+            onMouseLeave={() => setSolutionsOpen(false)}
+          >
             <button
               type="button"
-              className="flex items-center gap-1 py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              onClick={() => setSolutionsOpen((v) => !v)}
               aria-haspopup="true"
+              aria-expanded={solutionsOpen}
+              className="flex items-center gap-1 py-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               Solutions
-              <ChevronDown className="h-4 w-4" aria-hidden="true" />
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${solutionsOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
             </button>
-            <div className="pointer-events-none absolute left-0 top-full mt-2 w-60 rounded-xl border border-white/10 bg-ink/95 p-2 opacity-0 shadow-xl backdrop-blur-md transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+            <div
+              className={`absolute left-0 top-full mt-2 w-60 rounded-[var(--radius-md)] border border-line-inverse bg-surface-inverse/95 p-2 shadow-[var(--shadow-dropdown)] backdrop-blur-md transition-opacity duration-200 ${
+                solutionsOpen
+                  ? "pointer-events-auto opacity-100"
+                  : "pointer-events-none opacity-0"
+              }`}
+            >
               {SOLUTIONS.map((s) => (
                 <Link
                   key={s.href}
                   href={s.href}
-                  className="block rounded-lg px-4 py-2.5 text-xs text-text-inverse hover:bg-white/10"
+                  onClick={() => setSolutionsOpen(false)}
+                  className="block rounded-[var(--radius-sm)] px-4 py-2.5 text-xs text-text-inverse hover:bg-white/10"
                 >
                   {s.label}
                 </Link>
@@ -398,82 +598,93 @@ git commit -m "feat: add section layout primitives"
 
 ---
 
-### Task 4: Proof strip (empty-safe)
+### Task 4: Outcomes strip
 
 **Files:**
-- Create: `src/components/sections/ProofStrip.tsx`
+- Create: `src/components/sections/OutcomesStrip.tsx`
 
 **Interfaces:**
-- Consumes: `Section`, `Eyebrow` from Task 3.
-- Produces: `ProofStrip()` — returns `null` when `CLIENTS` is empty.
+- Consumes: `Section` from Task 3, and the existing `CountUp` from `src/components/ui/count-up.tsx`.
+- Produces: `OutcomesStrip()`.
 
-Vertex has no social proof anywhere on its site. This is the section that beats it — but only once real names exist, so it ships empty and silent.
+A grayscale client-logo marquee is the most common SaaS cliché, and Evectus cannot honestly populate one yet — an under-filled logo row reads as padding and actively weakens the page. Quantified outcomes are more credible for a firm at this stage, and the numbers **already exist and are already published** on `/case-studies:15-20`. This section reuses them rather than inventing anything.
+
+`CountUp` takes `{ value: string; duration?: number; className?: string }` and animates the numeric portion while preserving any prefix or suffix, so `"100%"` and `"5"` both work as-is.
+
+Rendered as a single hairline-bounded row — bordered top and bottom, not boxed into cards — so it reads as a continuation of the page rather than an injected widget.
 
 - [ ] **Step 1: Create the file**
 
 ```tsx
-import Image from "next/image";
-import { Section, Eyebrow } from "./_primitives";
+import { Section } from "./_primitives";
+import { CountUp } from "@/components/ui/count-up";
 
-type Client = { name: string; logo?: string };
+/** Real, already-published figures — mirrored from src/app/case-studies/page.tsx:15-20. */
+const OUTCOMES = [
+  { value: "5", label: "Products Shipped" },
+  { value: "100%", label: "On-Time Delivery" },
+  { value: "95%", label: "Milestone Hit-Rate" },
+  { value: "100%", label: "Partner Retention" },
+] as const;
 
-/**
- * Fill this in with real clients only.
- * `logo` is an optional path under /public; without it the name renders
- * as a text wordmark. Leave the array empty and this section will not render.
- */
-const CLIENTS: Client[] = [];
-
-export function ProofStrip() {
-  if (CLIENTS.length === 0) return null;
-
+export function OutcomesStrip() {
   return (
-    <Section tone="surface" className="!py-16">
-      <div className="flex flex-col items-center gap-10">
-        <Eyebrow>Trusted by</Eyebrow>
-        <ul className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
-          {CLIENTS.map((c) => (
-            <li key={c.name}>
-              {c.logo ? (
-                <Image
-                  src={c.logo}
-                  alt={c.name}
-                  width={132}
-                  height={36}
-                  className="h-9 w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-                />
-              ) : (
-                <span className="font-display text-lg font-bold uppercase tracking-wider text-text-muted">
-                  {c.name}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <Section tone="paper" className="!py-16 md:!py-20">
+      <dl className="grid grid-cols-2 gap-y-10 border-y border-line py-12 md:grid-cols-4 md:gap-x-8">
+        {OUTCOMES.map((o) => (
+          <div key={o.label} className="flex flex-col gap-2 text-center md:text-left">
+            <dt className="sr-only">{o.label}</dt>
+            <dd>
+              <CountUp
+                value={o.value}
+                className="font-display text-[length:var(--text-3xl)] font-bold tracking-tight text-text-primary"
+              />
+              <span
+                aria-hidden="true"
+                className="label mt-2 block text-text-secondary"
+              >
+                {o.label}
+              </span>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </Section>
   );
 }
 
-export default ProofStrip;
+export default OutcomesStrip;
 ```
 
-- [ ] **Step 2: Verify the empty state**
+The `.label` utility here is the one defined in **Task 1B** — this task depends on 1B having landed.
+
+`dt` carries the real label for screen readers and the visible `span` is `aria-hidden`, so the number is never announced as a bare figure without its meaning.
+
+- [ ] **Step 2: Confirm `CountUp`'s export style**
+
+```bash
+rg -n 'export' src/components/ui/count-up.tsx
+```
+If it is a default-only export, change the import to `import CountUp from "@/components/ui/count-up";`. Do not modify `count-up.tsx` — it is used on `/case-studies` and must keep working there.
+
+- [ ] **Step 3: Verify**
 
 ```bash
 npm run lint && npm run build
 ```
-Expected: pass, and the component contributes no DOM.
 
 **Acceptance checks:**
-- With `CLIENTS` empty, no "Trusted by" text and no empty padded band appear anywhere on the page.
-- Temporarily adding `{ name: "Test" }` renders one wordmark; revert before committing.
+- Four figures render, animating from 0 on scroll into view.
+- `100%` and `95%` keep their `%` suffix; `5` renders bare.
+- With `prefers-reduced-motion: reduce`, final values are shown without the count animation.
+- `/case-studies` still renders its own stats correctly — `CountUp` was not changed.
+- 2 columns at 360px, 4 at desktop.
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
-git add src/components/sections/ProofStrip.tsx
-git commit -m "feat: add empty-safe client proof strip"
+git add src/components/sections/OutcomesStrip.tsx
+git commit -m "feat: add quantified outcomes strip using existing CountUp"
 ```
 
 ---
@@ -999,7 +1210,7 @@ Add `priority` and `quality={90}` to the background `<Image>` — `quality={90}`
 import Footer from "@/components/Footer";
 import SiteNav from "@/components/SiteNav";
 import { PrimeNestHero } from "@/components/PrimeNestHero";
-import ProofStrip from "@/components/sections/ProofStrip";
+import OutcomesStrip from "@/components/sections/OutcomesStrip";
 import Problem from "@/components/sections/Problem";
 import Capabilities from "@/components/sections/Capabilities";
 import FeaturedWork from "@/components/sections/FeaturedWork";
@@ -1013,7 +1224,7 @@ export default function Home() {
       <SiteNav />
       <main>
         <PrimeNestHero />
-        <ProofStrip />
+        <OutcomesStrip />
         <Problem />
         <Capabilities />
         <FeaturedWork />
@@ -1044,7 +1255,7 @@ npm run lint && npm run build && npm run dev
 ```
 
 **Acceptance checks:**
-- Section order top to bottom: nav, hero, problem, capabilities, featured work, FAQ, CTA, footer. Proof strip and testimonials are **absent** (empty arrays) — this is correct.
+- Section order top to bottom: nav, hero, outcomes strip, problem, capabilities, featured work, FAQ, CTA, footer. Testimonials is **absent** (empty array) — this is correct, not a bug.
 - No console errors or hydration warnings.
 - Every link resolves; no `href="#"` anywhere.
 - Contrast: hero text over the photograph meets AA.
@@ -1061,9 +1272,24 @@ git commit -m "feat: assemble redesigned homepage"
 
 ---
 
+## Bugs this plan fixes that were not in the original brief
+
+All three were found during the design pass and **independently verified against the codebase** before being written up. None were part of the redesign request.
+
+| Bug | Evidence | Fixed in |
+|---|---|---|
+| Five type utilities used 53× across 11 route files, defined nowhere. Every inner page renders at browser-default type. | `grep -rE '@utility (h-section\|h-card\|body-md\|body-lg\|label)' src/` → no matches; 53 usages | Task 1B |
+| Solutions dropdown cannot be opened by keyboard or touch. `isSolutionsOpen` is declared (`:11`) and toggled (`:62`) but never read; visibility is `group-hover` only (`:70`). WCAG 2.1.1 failure. | `grep -n "SolutionsOpen"` returns only lines 11 and 62 | Task 2 |
+| Focus ring is `#111111` on `#111111` surfaces — invisible on the dark CTA band and mobile drawer. | `neon-button.tsx:17` | Task 1B |
+
+Contrast failures corrected in Task 1: `#838282` body text (3.39:1), `#A3A3A3` stat captions (2.52:1 at 14px), `#1d70e2` CTA (4.7:1, no margin).
+
 ## Self-review notes
 
 - **Spec coverage:** all 9 sections in the design doc map to a task. Sections 1–2 → Tasks 2 and 10; 3 → Task 4; 4 → Task 5; 5 → Task 6; 6 → Task 7; 7 → Task 8; 8 → Task 9; 9 → Task 10.
-- **Deliberate deviation:** the design doc lists no primitives task; Task 3 was added because six sections share the same padding and eyebrow treatment, and defining it once is cheaper than six copies.
-- **Known unknown:** `CTABanner`'s current prop signature has not been read. Task 10 Step 2 instructs the implementer to read it and adapt rather than assume — the one place this plan cannot supply exact code.
-- **Type consistency:** `Section`/`Eyebrow`/`SectionHeading` signatures in Task 3 match every call site in Tasks 4–9. `tone` accepts only `"paper" | "surface" | "ink"`.
+- **Deliberate deviation — Task 3:** the design doc lists no primitives task. Added because six sections share the same padding and eyebrow treatment; defining it once is cheaper than six copies.
+- **Deliberate deviation — Task 4:** the design doc specifies a client-logo proof strip. Replaced with a quantified-outcomes strip built from figures already published on `/case-studies`, because an under-filled logo row reads as padding and Evectus has supplied no logo assets. This was raised and approved.
+- **Approved scope extension — Task 1B:** touches `globals.css`, one line of `case-studies/page.tsx`, and one line of `neon-button.tsx`, and changes rendering on 11 routes. Explicitly accepted, and carries a mandatory before/after audit of every affected page.
+- **Known unknown:** `CTABanner`'s current prop signature has not been read. Task 10 Step 2 instructs the implementer to read it and adapt rather than assume — the one place this plan deliberately does not supply exact code, because 11 other call sites depend on that interface.
+- **Type consistency:** `Section`/`Eyebrow`/`SectionHeading` signatures in Task 3 match every call site in Tasks 4–9. `tone` accepts only `"paper" | "surface" | "ink"`. `CountUp` is consumed in Task 4 with the signature verified from `count-up.tsx:6-13`.
+- **Token dependency:** Task 4 uses the `.label` utility from Task 1B, so 1B must land first. No other cross-task ordering constraints beyond the stated sequence.
