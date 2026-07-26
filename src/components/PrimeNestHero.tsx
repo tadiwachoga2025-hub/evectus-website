@@ -16,17 +16,17 @@ import Parallax from "@/components/ui/Parallax";
 export function PrimeNestHero() {
   return (
     <section className="relative min-h-[640px] md:min-h-[760px] lg:min-h-[820px] w-full overflow-hidden flex flex-col justify-end bg-[#f2f2f2]">
-      {/* Background Image
-          Johannesburg CBD at dusk, shot from Braamfontein.
-          Photo: Tania Melnyczuk / Unsplash (Unsplash License, no attribution
-          required). https://unsplash.com/photos/diwubNzqQW0
-          Chosen over a generic glass-tower stock shot because the African
-          skyline is on-message for "Shifting The Culture", and the orange
-          horizon band is the source of the terracotta accent token. */}
+      {/* Background Image — client-supplied.
+          A boardroom mid-session, high floor, city beyond the glass. Chosen over
+          the previous dusk skyline because it shows the work rather than the
+          setting, and it carries no cloud.
+          Source is square (2000x2000); the hero is a wide band, so object-cover
+          shows roughly the middle 43% — the faces, laptops and table. The
+          out-of-focus figure at lower left is what the headline sits on. */}
       <Parallax amount={8}>
         <Image
-          src="/hero-johannesburg-dusk.jpg"
-          alt="The Johannesburg city skyline at dusk, lit windows and street lights beneath an orange and violet sunset"
+          src="/hero-boardroom.jpg"
+          alt="A strategy session in a high-rise boardroom, colleagues around a long table with laptops and documents, the city visible through floor-to-ceiling windows"
           fill
           priority
           quality={90}
@@ -35,11 +35,29 @@ export function PrimeNestHero() {
         />
       </Parallax>
 
-      {/* Dark overlay at top for navigation readability */}
-      <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black/85 via-black/45 to-transparent pointer-events-none z-10" />
+      {/* Two edge scrims only, each doing one job, so the middle of the frame
+          stays clean. The previous pass ran a full-height from-black/70 wash
+          across 85% of the width — needed for the dusk photo's bright orange
+          horizon, but on this darker image it just muddies the whole picture. */}
 
-      {/* Smooth gradient fade at bottom blending section into off-white (#f2f2f2) content below */}
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent pointer-events-none z-10" />
+      {/* Top: the nav is transparent over the hero and this image is brightest
+          at the top (windows), so white nav links need help here. */}
+      <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/70 via-black/25 to-transparent pointer-events-none z-10" />
+
+      {/* Left: the headline runs to roughly 70% of the width, and its right half
+          crosses the brightest part of the frame — the lit table and laptops.
+          Tested by compositing the real crop with the real type: without this,
+          "Solution Today" sat on near-white. Stops at 72% so the far right of
+          the photograph stays untouched. */}
+      <div className="absolute inset-y-0 left-0 w-full md:w-[72%] bg-gradient-to-r from-black/45 to-transparent pointer-events-none z-10" />
+
+      {/* Bottom: darkens the band the headline, subtitle and CTAs occupy. */}
+      <div className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-black/85 via-black/42 to-transparent pointer-events-none z-10" />
+
+      {/* No bottom fade. A `from-[#f2f2f2]` gradient used to rise 12rem up the
+          frame to blend into the paper section below, but it read as milky fog
+          sitting over the lower half of the photo. A clean edge between the
+          image and the paper band is sharper and reads as intentional. */}
 
       {/* Hero Content — bottom-anchored, left-aligned, staggered reveal */}
       {/* Bottom-anchored (the section is justify-end), so pb- is what lifts the
