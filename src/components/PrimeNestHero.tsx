@@ -16,11 +16,17 @@ import Parallax from "@/components/ui/Parallax";
 export function PrimeNestHero() {
   return (
     <section className="relative min-h-[640px] md:min-h-[760px] lg:min-h-[820px] w-full overflow-hidden flex flex-col justify-end bg-[#f2f2f2]">
-      {/* Background Image */}
+      {/* Background Image
+          Johannesburg CBD at dusk, shot from Braamfontein.
+          Photo: Tania Melnyczuk / Unsplash (Unsplash License, no attribution
+          required). https://unsplash.com/photos/diwubNzqQW0
+          Chosen over a generic glass-tower stock shot because the African
+          skyline is on-message for "Shifting The Culture", and the orange
+          horizon band is the source of the terracotta accent token. */}
       <Parallax amount={8}>
         <Image
-          src="/evectus-tech-hq.png"
-          alt="Evectus Solutions technology innovation and strategic consulting headquarters at sunset"
+          src="/hero-johannesburg-dusk.jpg"
+          alt="The Johannesburg city skyline at dusk, lit windows and street lights beneath an orange and violet sunset"
           fill
           priority
           quality={90}
@@ -36,7 +42,10 @@ export function PrimeNestHero() {
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#f2f2f2] via-[#f2f2f2]/80 to-transparent pointer-events-none z-10" />
 
       {/* Hero Content — bottom-anchored, left-aligned, staggered reveal */}
-      <div className="relative z-20 w-full px-6 pb-28 pt-32 md:px-12 md:pb-36 lg:px-16">
+      {/* Bottom-anchored (the section is justify-end), so pb- is what lifts the
+          block. It also clears the h-48 paper fade, which the old pb-28 sat
+          inside — the copy was washing out against the gradient. */}
+      <div className="relative z-20 w-full px-6 pb-40 pt-32 md:px-12 md:pb-48 lg:px-16">
         <div className="mr-auto max-w-[760px] lg:max-w-none">
           <Reveal y={20}>
             <span className="block font-satoshi text-xs font-bold uppercase tracking-widest text-white/90 drop-shadow-sm">

@@ -27,6 +27,10 @@ const playfair = Playfair_Display({
 
 
 export const metadata: Metadata = {
+  // Without this, og:image resolves against localhost in dev and against the
+  // .vercel.app deployment URL in prod — neither is the canonical domain, and
+  // social crawlers need an absolute URL that actually serves the image.
+  metadataBase: new URL("https://evectussolutions.co.zw"),
   title: {
     default: "Evectus Solutions — Shifting the Culture",
     template: "%s · Evectus Solutions",
