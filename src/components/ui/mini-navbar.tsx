@@ -41,6 +41,8 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(!overlay);
   const solutionsRef = useRef<HTMLDivElement>(null);
+  const solutionsButtonRef = useRef<HTMLButtonElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggle = useCallback(() => setIsOpen((v) => !v), []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -76,7 +78,14 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setIsSolutionsOpen(false);
+      if (event.key === "Escape") {
+        // Closing sets the panel inert, which would silently drop focus to
+        // <body> if it was inside — restore it to the disclosure button.
+        // Guarded so a document-wide Escape elsewhere doesn't steal focus.
+        const hadFocus = solutionsRef.current?.contains(document.activeElement);
+        setIsSolutionsOpen(false);
+        if (hadFocus) solutionsButtonRef.current?.focus();
+      }
     }
 
     document.addEventListener("mousedown", handlePointerDown);
@@ -87,11 +96,28 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
     };
   }, [isSolutionsOpen]);
 
+  // Mobile drawer: Escape closes it and returns focus to the toggle button,
+  // matching the disclosure pattern the Solutions dropdown already follows.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        toggleButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
   const isDark = overlay && !scrolled;
 
+  // py-2 grows each link's hit area from ~21px to ~37px. The bar is a fixed
+  // h-20 with items-center, so the padding enlarges the target without
+  // moving anything visually.
   const linkClass = isDark
-    ? "font-satoshi text-[14px] font-medium uppercase tracking-wider text-white transition-colors duration-120 hover:text-white/70"
-    : "font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#111111] transition-colors duration-120 hover:text-[#666666]";
+    ? "py-2 font-satoshi text-[14px] font-medium uppercase tracking-wider text-white transition-colors duration-120 hover:text-white/70"
+    : "py-2 font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#111111] transition-colors duration-120 hover:text-[#666666]";
 
   return (
     <header
@@ -112,15 +138,16 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
         </Link>
 
         {/* Nav — centre */}
-        <nav className="hidden items-center gap-8 md:flex lg:gap-10">
+        <nav className="hidden items-center gap-8 lg:flex lg:gap-10">
           {/* Solutions dropdown */}
           <div ref={solutionsRef} className="relative group">
             <button
+              ref={solutionsButtonRef}
               type="button"
               onClick={() => setIsSolutionsOpen((prev) => !prev)}
-              aria-haspopup="true"
               aria-expanded={isSolutionsOpen}
-              className={`flex items-center gap-1 py-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c1552a] ${
+              aria-controls="solutions-panel"
+              className={`flex items-center gap-1 py-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c1552a] ${
                 isDark
                   ? "text-white hover:text-white/70 focus-visible:ring-offset-black"
                   : "text-[#111111] hover:text-[#666666] focus-visible:ring-offset-[#f2f2f2]"
@@ -134,6 +161,7 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
             </button>
 
             <div
+              id="solutions-panel"
               inert={!isSolutionsOpen}
               className={`absolute left-0 top-full mt-2 w-64 rounded-xl border border-[#1e1e1e]/10 bg-[#f4f3f0] p-2 shadow-[0_8px_24px_-8px_rgba(20,18,15,0.24)] transition-opacity duration-200 ${
                 isSolutionsOpen
@@ -165,13 +193,13 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
         <div className="flex items-center gap-4">
           <Link
             href="/about"
-            className={`hidden md:inline-block ${linkClass}`}
+            className={`hidden lg:inline-block ${linkClass}`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className={`hidden rounded-full px-6 py-2.5 font-satoshi text-[14px] font-medium uppercase tracking-wider transition-all duration-200 md:inline-block ${
+            className={`hidden rounded-full px-6 py-2.5 font-satoshi text-[14px] font-medium uppercase tracking-wider transition-all duration-200 lg:inline-block ${
               isDark
                 ? "border border-white bg-white text-[#111111] hover:bg-transparent hover:text-white"
                 : "border border-[#1e1e1e] bg-transparent text-[#111111] hover:bg-[#1e1e1e] hover:text-[#f2f2f2]"
@@ -180,12 +208,13 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
             Contact
           </Link>
           <button
+            ref={toggleButtonRef}
             type="button"
             onClick={toggle}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? "Close menu" : "Open menu"}
-            className={`p-2 md:hidden ${isDark ? "text-white" : "text-[#111111]"}`}
+            className={`p-2 lg:hidden ${isDark ? "text-white" : "text-[#111111]"}`}
           >
             {isOpen ? (
               <X className="h-6 w-6" aria-hidden="true" />
@@ -202,20 +231,24 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
         id="mobile-menu"
         inert={!isOpen}
         className={[
-          "overflow-hidden border-t border-[#1e1e1e]/10 bg-[#f2f2f2]/95 backdrop-blur-[12px] md:hidden",
+          "overflow-hidden border-t border-[#1e1e1e]/10 bg-[#f2f2f2]/95 backdrop-blur-[12px] lg:hidden",
           "transition-[max-height,opacity] duration-300 ease-in-out",
           isOpen
             ? "max-h-96 opacity-100"
             : "max-h-0 opacity-0 pointer-events-none border-transparent",
         ].join(" ")}
       >
-        <nav className="flex flex-col items-center gap-4 py-6">
+        {/* py-2.5 on each link lifts the tap target to ~41px. The old
+            16px gap-4 is absorbed into the links' combined 20px padding,
+            and py-6 → py-3.5 keeps the drawer's overall height close to
+            what it was. */}
+        <nav className="flex flex-col items-center py-3.5">
           {mobileItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={close}
-              className="font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#111111] transition-colors hover:text-[#666666]"
+              className="py-2.5 font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#111111] transition-colors hover:text-[#666666]"
             >
               {item.label}
             </Link>
@@ -223,7 +256,7 @@ export function Navbar({ overlay = false }: { overlay?: boolean }) {
           <Link
             href="/contact"
             onClick={close}
-            className="mt-2 rounded-full border border-[#1e1e1e] bg-[#1e1e1e] px-8 py-3 font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#f2f2f2]"
+            className="mt-3.5 rounded-full border border-[#1e1e1e] bg-[#1e1e1e] px-8 py-3 font-satoshi text-[14px] font-medium uppercase tracking-wider text-[#f2f2f2]"
           >
             Contact
           </Link>

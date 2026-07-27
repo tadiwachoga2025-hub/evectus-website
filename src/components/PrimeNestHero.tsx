@@ -29,7 +29,6 @@ export function PrimeNestHero() {
           alt="A strategy session in a high-rise boardroom, colleagues around a long table with laptops and documents, the city visible through floor-to-ceiling windows"
           fill
           priority
-          quality={90}
           sizes="100vw"
           className="object-cover object-center scale-105"
         />
@@ -77,7 +76,7 @@ export function PrimeNestHero() {
               <span className="font-clash font-bold text-white">
                 Find Your Superior
               </span>{" "}
-              <span className="font-serif italic font-normal text-white/90">
+              <span className="whitespace-nowrap font-serif italic font-normal text-white/90">
                 Solution Today
               </span>
             </h1>
@@ -86,7 +85,7 @@ export function PrimeNestHero() {
           {/* Subtitle */}
           <Reveal y={24} delay={0.2}>
             <p className="mt-6 max-w-[56ch] font-satoshi text-lg md:text-xl text-white/80 font-normal leading-relaxed drop-shadow-sm">
-              Discover high-performance digital transformation with Evectus Solutions — your trusted partner in building, scaling, and modernizing enterprise infrastructure.
+              We modernize enterprise infrastructure, build custom software, and deliver strategy across Africa — engineered to global standards, shipped on time, and handed over with complete knowledge transfer.
             </p>
           </Reveal>
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -16,7 +17,7 @@ const phases = [
     n: "02",
     label: "STRATEGY & DESIGN",
     title: "We blueprint the solution.",
-    body: "Using ingenuity, we design a superior solution and blueprint the roadmap to your transformation.",
+    body: "We design the target system and sequence the roadmap — scope, milestones, and budget defined before implementation begins.",
   },
   {
     n: "03",
@@ -50,16 +51,22 @@ const expectations = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Our Process",
+  description:
+    "The Evectus Method: four disciplined phases from discovery and audit to knowledge transfer — with weekly demos and direct partner access throughout.",
+};
+
 export default function ProcessPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="Our Process"
           headline="The Evectus Method: from ordinary to extraordinary."
-          body="A defined process ensures we deliver on our promises of Integrity and Trust."
-          imageSrc="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=2000&q=80"
+          body="Four phases, weekly demos, and direct partner access — the discipline behind on-time, on-budget delivery."
+          imageSrc="/heroes/process-planning.jpg"
           imageAlt="Whiteboard planning session"
         />
 

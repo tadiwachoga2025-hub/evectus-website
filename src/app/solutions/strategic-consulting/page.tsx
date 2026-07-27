@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -46,11 +47,17 @@ const formats = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Strategic Consulting",
+  description:
+    "Market entry analysis, business restructuring, and growth strategy built on data and local insight — delivered as sprints, roadmaps, or embedded teams.",
+};
+
 export default function StrategicConsultingPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="02 · Strategic Consulting"
           headline="Navigate the future with clarity."

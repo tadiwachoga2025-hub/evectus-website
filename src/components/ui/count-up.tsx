@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate } from "animejs";
+import { animate } from "framer-motion";
+import { EASE } from "@/components/ui/Reveal";
 
 type CountUpProps = {
   /** Display value like "+40%", "100%", "-60%". The numeric portion is animated; prefix/suffix preserved. */
@@ -66,12 +67,10 @@ export function CountUp({ value, duration = 1800, className }: CountUpProps) {
     const trigger = () => {
       if (playedRef.current) return;
       playedRef.current = true;
-      const state = { n: 0 };
-      animate(state, {
-        n: numeric,
-        duration,
-        ease: "out(3)",
-        onUpdate: () => write(Math.round(state.n)),
+      animate(0, numeric, {
+        duration: duration / 1000,
+        ease: EASE,
+        onUpdate: (v) => write(Math.round(v)),
         onComplete: () => write(numeric),
       });
     };

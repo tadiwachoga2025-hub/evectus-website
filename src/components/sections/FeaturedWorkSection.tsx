@@ -10,21 +10,24 @@ const PROJECTS = [
     title: "SchoolPulse",
     category: "Education & Classroom Management",
     description: "Real-time analytics and management system for institutional education scaling across southern Africa.",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
+    outcome: "Automated 80% of manual admin work for teachers",
+    image: "/heroes/work-schoolpulse.jpg",
     href: "/case-studies#schoolpulse",
   },
   {
     title: "LegalPro Platform",
     category: "Legal & Regulatory Compliance",
     description: "Comprehensive case management, deadline tracking, and document intelligence platform.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
+    outcome: "Unified case tracking, billing, and document management",
+    image: "/heroes/work-legalpro.jpg",
     href: "/case-studies#legalpro",
   },
   {
     title: "Healing Institute TV",
     category: "Digital Media & Streaming",
     description: "High-concurrency streaming infrastructure and content distribution ecosystem.",
-    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1200&q=80",
+    outcome: "Global reach with sub-2s stream latency",
+    image: "/heroes/work-streaming.jpg",
     href: "/case-studies#healing-institute",
   },
 ] as const;
@@ -61,7 +64,7 @@ export function FeaturedWorkSection() {
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#111111]">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt=""
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] group-hover:scale-105 opacity-90"
@@ -82,8 +85,13 @@ export function FeaturedWorkSection() {
                       {project.description}
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-2 font-satoshi text-xs font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#c1552a] transition-colors">
-                    Read Case Study &rarr;
+                  <div className="mt-6">
+                    <span className="font-satoshi text-[11px] font-bold uppercase tracking-widest text-[#c1552a]">
+                      {project.outcome}
+                    </span>
+                    <div className="mt-3 flex items-center gap-2 font-satoshi text-xs font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#c1552a] transition-colors">
+                      Read Case Study &rarr;
+                    </div>
                   </div>
                 </div>
               </Link>

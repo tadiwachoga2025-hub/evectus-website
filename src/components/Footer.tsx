@@ -17,6 +17,7 @@ const company = [
   { href: "/african-agenda", label: "African Agenda" },
   { href: "/process", label: "Process & Method" },
   { href: "/case-studies", label: "Case Studies" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 export default function Footer() {
@@ -43,12 +44,15 @@ export default function Footer() {
             <h3 className="font-satoshi text-xs font-bold uppercase tracking-widest text-[#f6f6f6]/80">
               Solutions
             </h3>
-            <ul className="flex flex-col gap-3">
+            {/* py-2 on each link grows the tap target from ~16px to ~32px;
+                the ul's gap drops to 0 and -my-2 trims the ends so the
+                column's visual rhythm stays where it was. */}
+            <ul className="-my-2 flex flex-col">
               {solutions.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="font-satoshi text-sm text-[#f6f6f6]/60 transition-colors duration-200 hover:text-[#f6f6f6]"
+                    className="inline-block py-2 font-satoshi text-sm text-[#f6f6f6]/60 transition-colors duration-200 hover:text-[#f6f6f6]"
                   >
                     {item.label}
                   </Link>
@@ -62,12 +66,12 @@ export default function Footer() {
             <h3 className="font-satoshi text-xs font-bold uppercase tracking-widest text-[#f6f6f6]/80">
               Company
             </h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="-my-2 flex flex-col">
               {company.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="font-satoshi text-sm text-[#f6f6f6]/60 transition-colors duration-200 hover:text-[#f6f6f6]"
+                    className="inline-block py-2 font-satoshi text-sm text-[#f6f6f6]/60 transition-colors duration-200 hover:text-[#f6f6f6]"
                   >
                     {item.label}
                   </Link>
@@ -84,9 +88,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-4 text-sm text-[#f6f6f6]/60">
               <li className="flex items-center gap-3">
                 <Mail aria-hidden="true" className="h-4 w-4 text-[#f6f6f6]/60 shrink-0" />
+                {/* py-2 -my-2 enlarges the tap target without shifting the
+                    row's flex centering; the neighbour below is plain text,
+                    so the extended hit area overlaps nothing interactive. */}
                 <a
                   href="mailto:evectussolution@gmail.com"
-                  className="transition-colors hover:text-[#f6f6f6]"
+                  className="-my-2 inline-block py-2 transition-colors hover:text-[#f6f6f6]"
                 >
                   evectussolution@gmail.com
                 </a>

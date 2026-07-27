@@ -1,8 +1,42 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@500,700&display=swap');
 @import "tailwindcss";
 
+/* Self-hosted Fontshare fonts (woff2 in /public/fonts). The previous remote
+   @import url(https://api.fontshare.com/...) was stripped from the served
+   bundle by Tailwind v4's CSS pipeline, silently dropping both families. */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: 'Satoshi', var(--font-inter), sans-serif;
+  --font-sans: 'Satoshi', system-ui, sans-serif;
   --font-display: 'Clash Display', sans-serif;
   /* Points at --font-playfair, NOT --font-serif. next/font emits its variable
      onto <html>, the same element as :root, so naming both --font-serif made
@@ -56,7 +90,7 @@ html,
 body {
   background-color: #f2f2f2;
   color: #111111;
-  font-family: 'Satoshi', var(--font-inter), system-ui, sans-serif;
+  font-family: 'Satoshi', system-ui, sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -174,6 +208,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

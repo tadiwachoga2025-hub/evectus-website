@@ -113,12 +113,12 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="Engage With Evectus"
           headline="Let's shift the culture together."
           body="Ready to replace the ordinary with the extraordinary? We'd love to hear about your work."
-          imageSrc="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=2000&q=80"
+          imageSrc="/heroes/contact-desk.jpg"
           imageAlt="Conversation between two people at a desk"
         />
 
@@ -266,6 +266,9 @@ export default function ContactPage() {
                     >
                       {status === "sending" ? "Sending…" : "Send Message"}
                     </Button>
+                    <p className="text-sm text-[#666666]">
+                      We reply within 24 hours.
+                    </p>
                     {status === "error" && (
                       <p className="text-red-600 text-sm" role="alert">
                         {errorMessage ?? "Something went wrong."} Please try

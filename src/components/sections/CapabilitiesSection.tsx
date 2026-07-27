@@ -92,22 +92,22 @@ export function CapabilitiesSection() {
                 <RevealItem key={s.n} y={20} className="border-b border-white/15">
                   <Link
                     href={s.href}
-                    className="group flex items-baseline gap-4 py-4 opacity-95 transition-opacity hover:opacity-100 md:gap-5"
+                    className="group flex items-baseline gap-4 py-4 md:gap-5"
                   >
-                    <span className="font-satoshi text-xs tracking-widest text-white/50 transition-colors group-hover:text-white/80">
+                    <span className="font-satoshi text-xs tracking-widest text-white/50 transition-colors duration-200 group-hover:text-white/80">
                       {s.n}
                     </span>
                     <span className="min-w-0 flex-1">
                       <h3 className="font-satoshi text-lg font-medium leading-tight text-white">
                         {s.title}
                       </h3>
-                      <span className="mt-1 block font-satoshi text-sm leading-snug text-white/60">
+                      <span className="mt-1 block font-satoshi text-sm leading-snug text-white/60 transition-colors duration-200 group-hover:text-white/90">
                         {s.body}
                       </span>
                     </span>
                     <ArrowRight
                       aria-hidden="true"
-                      className="h-4 w-4 shrink-0 text-white/40 transition group-hover:translate-x-1 group-hover:text-white/90"
+                      className="h-4 w-4 shrink-0 text-white/40 transition-[color,transform] duration-200 group-hover:translate-x-1 group-hover:text-white/90"
                     />
                   </Link>
                 </RevealItem>
@@ -138,6 +138,11 @@ export function CapabilitiesSection() {
               </li>
             ))}
           </ul>
+          {/* /50 computes to ~5.2:1 on #14120f — clears the 4.5:1 AA floor
+              even at this caption size. Don't drop below /50 here. */}
+          <p className="mt-4 font-satoshi text-[10px] uppercase tracking-widest text-white/50">
+            Measured across all Evectus client engagements to date.
+          </p>
         </Reveal>
       </div>
     </section>

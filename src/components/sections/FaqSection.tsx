@@ -19,6 +19,14 @@ const FAQS = [
     q: "What support and knowledge transfer take place after handover?",
     a: "Every engagement concludes with comprehensive internal team training, documented operational runbooks, and a 30-day post-launch warranty period with optional long-term SLA support.",
   },
+  {
+    q: "Do you work with organizations outside Zimbabwe?",
+    a: "Yes. Our home office is in Harare and our project teams deploy across the continent — we build for schools, law firms, ministries, and businesses across Africa and beyond, and our platforms already serve users globally. We are reachable Mon–Fri, 08:00–17:00 CAT.",
+  },
+  {
+    q: "How do you approach security and data ownership?",
+    a: "Where an engagement involves infrastructure modernization, we migrate legacy systems to secure cloud infrastructure. On completion you retain 100% ownership of all custom code, data schemas, cloud configurations, and documentation.",
+  },
 ] as const;
 
 export function FaqSection() {

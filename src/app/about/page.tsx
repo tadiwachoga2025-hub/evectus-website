@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
@@ -5,7 +6,7 @@ import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { HairlineGrid, HairlineCell } from "@/components/ui/Hairline";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 const values = [
   {
@@ -23,6 +24,13 @@ const values = [
     title: "Ordinary is not in our vocabulary.",
     body: "We approach every problem with fresh eyes — leveraging local insight and global best practices to craft exceptional solutions.",
   },
+];
+
+const offices = [
+  { city: "Harare", label: "HOME OFFICE" },
+  { city: "Lagos", label: "PROJECT TEAMS" },
+  { city: "Nairobi", label: "PROJECT TEAMS" },
+  { city: "Cape Town", label: "PROJECT TEAMS" },
 ];
 
 const team = [
@@ -55,16 +63,22 @@ function getInitials(name: string) {
     .join("");
 }
 
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Meet the team behind Evectus Solutions — Harare-based strategists and technologists building better systems for Africa on integrity, trust, and ingenuity.",
+};
+
 export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="About Evectus"
           headline="Built on integrity. Driven by ingenuity. Rooted in trust."
           body="Evectus Solutions was founded on a simple premise: Africa deserves better. Better systems, better strategies, better outcomes."
-          imageSrc="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=2000&q=80"
+          imageSrc="/heroes/about-team.jpg"
           imageAlt="Team meeting in a modern office"
         />
 
@@ -95,7 +109,7 @@ export default function AboutPage() {
             {team.map((m) => (
               <RevealItem
                 key={m.name}
-                className="flex flex-col transition-transform duration-300 hover:-translate-y-1"
+                className="flex flex-col"
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-[#1e1e1e]/10">
                   {m.imageSrc ? (
@@ -125,16 +139,19 @@ export default function AboutPage() {
 
         {/* Where we work */}
         <Section tone="white">
-          <Reveal className="flex flex-col gap-6">
-            <span className="label">Offices</span>
-            <h2 className="h-section">
-              Harare. Lagos. Nairobi. Cape Town.
-            </h2>
-            <p className="body-lg max-w-2xl text-black/80">
-              We operate where our clients are. Our home office is in Harare;
-              our project teams deploy across the continent.
-            </p>
-          </Reveal>
+          <SectionHeader
+            eyebrow="Offices"
+            heading="Harare. Lagos. Nairobi. Cape Town."
+            body="We operate where our clients are. Our home office is in Harare; our project teams deploy across the continent."
+          />
+          <HairlineGrid columns={4}>
+            {offices.map((o) => (
+              <HairlineCell key={o.city}>
+                <span className="label text-[#666666]">{o.label}</span>
+                <h3 className="h-card">{o.city}</h3>
+              </HairlineCell>
+            ))}
+          </HairlineGrid>
         </Section>
 
         <CTABanner

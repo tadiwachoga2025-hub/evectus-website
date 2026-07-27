@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
@@ -41,11 +42,17 @@ const stack = [
   "Go",
 ];
 
+export const metadata: Metadata = {
+  title: "Technology Development",
+  description:
+    "Custom enterprise software, mobile and web applications, and integration architecture — tailored technology built for African business challenges.",
+};
+
 export default function TechnologyDevelopmentPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="03 · Technology Development"
           headline="If it doesn't exist, we build it."
@@ -70,7 +77,7 @@ export default function TechnologyDevelopmentPage() {
         <Section tone="ink" className="relative overflow-hidden">
           <Parallax amount={10}>
             <Image
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=2000&q=80"
+              src="/heroes/tech-dev-dashboard.jpg"
               alt="Engineers collaborating on code"
               fill
               sizes="100vw"

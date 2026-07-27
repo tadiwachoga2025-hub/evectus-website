@@ -33,7 +33,7 @@ export function ProblemSection() {
             <Reveal y={24} delay={0.3} className="mt-8 md:mt-auto md:pt-10">
               <Link
                 href="/process"
-                className="inline-flex items-center justify-center rounded-full bg-[#111111] px-8 py-4 font-satoshi text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:opacity-85 hover:shadow-lg hover:shadow-black/15"
+                className="inline-flex items-center justify-center rounded-full bg-[#111111] px-8 py-4 font-satoshi text-xs font-bold uppercase tracking-[0.15em] text-white border border-[#111111] transition-colors duration-200 ease-out hover:bg-transparent hover:text-[#111111]"
               >
                 See how we work
               </Link>
@@ -45,9 +45,10 @@ export function ProblemSection() {
             className="relative order-1 min-h-[320px] overflow-hidden rounded-2xl md:order-2 md:col-span-5 md:min-h-[420px] lg:min-h-[460px]"
             delay={0.2}
           >
+            {/* Photo by Christina @ wocintechchat.com on Unsplash — https://unsplash.com/photos/rg1y72eKw6o */}
             <Image
-              src="/hero-team.jpg"
-              alt="Evectus strategic engineering team collaborating"
+              src="/problem-team.jpg"
+              alt="Professionals collaborating around a boardroom table with laptops"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover"

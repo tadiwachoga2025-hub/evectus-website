@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
@@ -51,16 +52,22 @@ const values = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "Solutions",
+  description:
+    "Four practice areas — Digital Transformation, Strategic Consulting, Technology Development, and Operational Excellence — tailored to your everyday problems.",
+};
+
 export default function SolutionsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="Our Solutions"
-          headline="Comprehensive solutions for a complex world."
-          body="We don't offer cookie-cutter packages. We provide superior solutions tailored to your everyday problems."
-          imageSrc="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2000&q=80"
+          headline="Four practices. One standard of delivery."
+          body="Digital Transformation, Strategic Consulting, Technology Development, and Operational Excellence — each engagement scoped to the problem in front of you, never a cookie-cutter package."
+          imageSrc="/heroes/solutions-strategy.jpg"
           imageAlt="Strategy session at a glass conference table"
         />
 
@@ -77,14 +84,14 @@ export default function SolutionsPage() {
                   href={p.href}
                   className="group -m-8 flex h-full cursor-pointer flex-col gap-4 p-8 hover:bg-black hover:text-white transition-colors duration-300 md:-m-10 md:p-10 lg:-m-12 lg:p-12"
                 >
-                  <span className="h-stat text-[#666666] group-hover:text-white/60">
+                  <span className="h-stat text-[#666666] group-hover:text-white/60 transition-colors duration-300">
                     {p.n}
                   </span>
                   <h3 className="h-card">{p.title}</h3>
-                  <p className="body-md text-black/80 group-hover:text-white/85">
+                  <p className="body-md text-black/80 group-hover:text-white/85 transition-colors duration-300">
                     {p.body}
                   </p>
-                  <span className="label mt-4 group-hover:text-white">
+                  <span className="label mt-4 group-hover:text-white transition-colors duration-300">
                     Learn More <span aria-hidden="true">→</span>
                   </span>
                 </Link>
@@ -116,6 +123,7 @@ export default function SolutionsPage() {
           body="Tell us about your challenge — we'll show you how we'd solve it."
           ctaLabel="Book a Consultation"
           ctaHref="/contact"
+          finePrint="We reply within 24 hours"
         />
       </main>
       <Footer />

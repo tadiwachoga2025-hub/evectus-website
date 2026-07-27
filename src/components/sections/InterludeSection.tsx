@@ -9,9 +9,10 @@ export function InterludeSection() {
     <section className="relative flex min-h-[600px] h-screen max-h-[900px] items-center overflow-hidden bg-[#14120f] text-white">
       {/* Full-bleed background image */}
       <Parallax amount={10}>
+        {/* Photo by imsogabriel stock on Unsplash — https://unsplash.com/photos/eeijZpKf2Kg */}
         <Image
-          src="/evectus-tech-hq.png"
-          alt="Evectus Solutions technology headquarters"
+          src="/interlude-skyline.jpg"
+          alt="Nairobi city skyline lit up at night"
           fill
           sizes="100vw"
           className="scale-110 object-cover opacity-60"

@@ -22,7 +22,7 @@ export default function CTABanner({
   finePrint?: string;
 }) {
   return (
-    <section className="bg-neutral-900 text-white px-6 py-28 md:px-12 md:py-36 lg:px-20 lg:py-44">
+    <section className="bg-[#14120f] text-white px-6 py-28 md:px-12 md:py-36 lg:px-20 lg:py-44">
       <div className="mx-auto flex max-w-[820px] flex-col items-center gap-6 text-center md:gap-8">
         <Reveal y={20}>
           <p className="text-xs uppercase tracking-widest text-white/70">

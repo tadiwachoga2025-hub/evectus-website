@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
@@ -11,7 +12,7 @@ const pillars = [
   {
     label: "THE VISION",
     title: "An Africa that creates and exports superior solutions.",
-    body: "We envision an Africa that is not just a consumer of global trends but a creator and exporter of superior solutions. An Africa where businesses compete on the world stage and win.",
+    body: "We envision an Africa that is not just a consumer of global trends but a builder that competes on the world stage — and wins.",
   },
   {
     label: "THE MISSION",
@@ -38,16 +39,22 @@ const commitments = [
   },
 ];
 
+export const metadata: Metadata = {
+  title: "The African Agenda",
+  description:
+    "Making Africa a Global Powerhouse: our vision of a continent that creates and exports superior solutions — measured in jobs, infrastructure, and capacity.",
+};
+
 export default function AfricanAgendaPage() {
   return (
     <>
       <Navbar overlay />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero */}
-        <section className="relative h-screen overflow-hidden">
+        <section className="relative min-h-[600px] h-screen max-h-[900px] overflow-hidden">
           <Parallax amount={10} className="pointer-events-none">
             <Image
-              src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=2000&q=80"
+              src="/heroes/agenda-africa.jpg"
               alt="Aerial view of an African landscape"
               fill
               priority
@@ -107,7 +114,7 @@ export default function AfricanAgendaPage() {
         <CTABanner
           headline="Join the movement."
           body="Partner with Evectus on the African century."
-          ctaLabel="Join the Movement"
+          ctaLabel="Partner With Us"
           ctaHref="/contact"
         />
       </main>

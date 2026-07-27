@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
@@ -17,6 +18,7 @@ type Product = {
   stack: string[];
   status: "Live" | "Beta" | "In Development";
   accent: string;
+  href: string;
 };
 
 const products: Product[] = [
@@ -30,17 +32,19 @@ const products: Product[] = [
     stack: ["Next.js", "TypeScript", "AI/LLM"],
     status: "Live",
     accent: "#4F46E5",
+    href: "/case-studies#schoolpulse",
   },
   {
     n: "02",
     name: "LegalPro",
-    tagline: "Law practice, modernised.",
+    tagline: "Law practice, modernized.",
     description:
       "A comprehensive legal case and practice management system built for law firms and in-house legal teams. Manage cases, deadlines, documents, and billing — from one streamlined platform.",
     category: "LegalTech SaaS",
     stack: ["TypeScript", "Next.js", "PostgreSQL"],
     status: "Beta",
     accent: "#0EA5E9",
+    href: "/case-studies#legalpro",
   },
   {
     n: "03",
@@ -52,6 +56,7 @@ const products: Product[] = [
     stack: ["Java", "Spring Boot", "SMS APIs"],
     status: "Live",
     accent: "#10B981",
+    href: "/contact",
   },
   {
     n: "04",
@@ -63,6 +68,7 @@ const products: Product[] = [
     stack: ["TypeScript", "React Native"],
     status: "In Development",
     accent: "#F59E0B",
+    href: "/contact",
   },
   {
     n: "05",
@@ -74,6 +80,7 @@ const products: Product[] = [
     stack: ["TypeScript", "Next.js", "Streaming APIs"],
     status: "Live",
     accent: "#8B5CF6",
+    href: "/case-studies#healing-institute",
   },
 ];
 
@@ -90,16 +97,22 @@ const productStats = [
   { label: "Year of Operation", value: "2026" },
 ];
 
+export const metadata: Metadata = {
+  title: "Products",
+  description:
+    "Five products built in-house: SchoolPulse, LegalPro, Notify SMS, StarPlus, and Healing Institute TV — software engineered for the African context and beyond.",
+};
+
 export default function ProductsPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="Our Products"
           headline="Software built to last."
-          body="We don't just consult — we build. Every product we ship is engineered with precision, designed with purpose, and built for the African context and beyond."
-          imageSrc="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=2000&q=80"
+          body="We don't just consult — we build. From education and legal practice to messaging and streaming, our products are engineered in-house for the African market — three of five already live in production."
+          imageSrc="/heroes/products-code.jpg"
           imageAlt="Code on a monitor — software development"
         />
 
@@ -115,33 +128,33 @@ export default function ProductsPage() {
             {products.map((p) => (
               <HairlineRow key={p.n} className="p-0">
                 <Link
-                  href="/case-studies"
+                  href={p.href}
                   className="group grid cursor-pointer items-start gap-8 bg-white px-10 py-8 transition-colors duration-300 hover:bg-black hover:text-white md:grid-cols-[1fr_auto] md:px-14 md:py-10"
                 >
                   {/* Left: main content */}
                   <div className="flex flex-col gap-5">
                     <div className="flex items-center gap-4 flex-wrap">
-                      <span className="label text-[#666666] group-hover:text-white/50">
+                      <span className="label text-[#666666] group-hover:text-white/50 transition-colors duration-300">
                         {p.n}
                       </span>
                       <span
-                        className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${statusStyles[p.status]} group-hover:bg-white/10 group-hover:text-white group-hover:border-white/20`}
+                        className={`text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border ${statusStyles[p.status]} group-hover:bg-white/10 group-hover:text-white group-hover:border-white/20 transition-colors duration-300`}
                       >
                         {p.status}
                       </span>
-                      <span className="label text-[#666666] group-hover:text-white/50">
+                      <span className="label text-[#666666] group-hover:text-white/50 transition-colors duration-300">
                         {p.category}
                       </span>
                     </div>
 
                     <div>
                       <h3 className="h-card mb-1">{p.name}</h3>
-                      <p className="text-lg font-medium text-black/60 group-hover:text-white/60 leading-snug">
+                      <p className="text-lg font-medium text-black/60 group-hover:text-white/60 leading-snug transition-colors duration-300">
                         {p.tagline}
                       </p>
                     </div>
 
-                    <p className="body-md text-black/75 group-hover:text-white/80 max-w-2xl">
+                    <p className="body-md text-black/75 group-hover:text-white/80 max-w-2xl transition-colors duration-300">
                       {p.description}
                     </p>
 
@@ -150,7 +163,7 @@ export default function ProductsPage() {
                       {p.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs tracking-wide uppercase border border-black/15 group-hover:border-white/20 px-3 py-1 rounded-full text-black/60 group-hover:text-white/60"
+                          className="text-xs tracking-wide uppercase border border-black/15 group-hover:border-white/20 px-3 py-1 rounded-full text-black/60 group-hover:text-white/60 transition-colors duration-300"
                         >
                           {tech}
                         </span>
@@ -210,6 +223,7 @@ export default function ProductsPage() {
           body="Tell us about your idea. We'll tell you how we'd ship it."
           ctaLabel="Start the Conversation"
           ctaHref="/contact"
+          finePrint="We reply within 24 hours"
         />
       </main>
       <Footer />

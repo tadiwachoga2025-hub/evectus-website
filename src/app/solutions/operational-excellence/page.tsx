@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -31,11 +32,17 @@ const metrics = [
   { value: "100%", label: "Partner Retention" },
 ];
 
+export const metadata: Metadata = {
+  title: "Operational Excellence",
+  description:
+    "Process optimization, supply chain management, and quality assurance that eliminate waste — typically reclaiming 30%+ of operational capacity.",
+};
+
 export default function OperationalExcellencePage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="04 · Operational Excellence"
           headline="Efficiency is the currency of growth."

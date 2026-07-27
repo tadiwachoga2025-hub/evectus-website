@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/ui/mini-navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -28,11 +29,17 @@ const steps = [
   { n: "04", label: "Embed" },
 ];
 
+export const metadata: Metadata = {
+  title: "Digital Transformation",
+  description:
+    "Cloud migration, data analytics, and change management — we modernize infrastructure and embed a digital-first culture with minimal disruption.",
+};
+
 export default function DigitalTransformationPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1">
         <PageHero
           label="01 · Digital Transformation"
           headline="Modernize or get left behind."
